@@ -243,3 +243,50 @@
     font-weight: inherit !important;
     display: inline !important;
 }
+
+/* ===================================================================
+   RESPONSIVE — DASHBOARD
+   Breakpoints: <=1200 tablet-landscape, <=900 tablet, <=600 phone
+   =================================================================== */
+
+/* Tablet landscape / small laptop — KPIs 2x2, keep row2 side-by-side */
+@media (max-width: 1200px) {
+    .o_dash_kpi_row { grid-template-columns: repeat(2, 1fr); }
+}
+
+/* Tablet portrait — stack the two content columns */
+@media (max-width: 900px) {
+    .o_dash_header {
+        flex-direction: column;
+        align-items: stretch;
+        gap: 16px;
+    }
+    .o_dash_filter_row {
+        flex-wrap: wrap;
+        gap: 12px;
+    }
+    .o_dash_filter_item { flex: 1 1 140px; }
+    .o_dash_filter_item .o_field_widget input,
+    .o_dash_filter_item .o_field_widget .o_input { width: 100% !important; min-width: 0; }
+    .o_dash_row2 { grid-template-columns: 1fr; }
+}
+
+/* Phone — single-column KPIs, tighter spacing, smaller numbers */
+@media (max-width: 600px) {
+    .o_dash_kpi_row {
+        grid-template-columns: 1fr;
+        gap: 12px;
+    }
+    .o_dash_header {
+        padding: 16px 18px;
+        border-radius: 10px;
+    }
+    .o_dash_brand { font-size: 18px; }
+    .o_kpi_inner { padding: 18px 16px 16px; }
+    .o_kpi_num { font-size: 34px; }
+    .o_dash_fbr_rate { font-size: 38px; }
+    .o_dash_card { padding: 16px; }
+    .o_dash_tax_row { flex-wrap: wrap; }
+    .o_dash_tax_item { flex: 1 1 45%; }
+    .o_dash_tax_divider { display: none; }
+}

@@ -769,3 +769,119 @@ button.o_list_button_discard:hover { background: #f8f7ff !important; border-colo
 .o_digital_invoice_lines_table tbody tr.o_ld_expanded td {
     padding-bottom: var(--o-ld-pad, 32px) !important;
 }
+
+/* ===================================================================
+   RESPONSIVE — FORM VIEWS + DASHBOARD
+   Breakpoints: <=1200 tablet-landscape, <=900 tablet, <=600 phone
+   Everything here uses !important because the base rules above do too;
+   without it the desktop declarations win the cascade on small screens.
+   =================================================================== */
+
+/* ---- Dashboard (duplicated block in this file) ---- */
+@media (max-width: 1200px) {
+    .o_dash_kpi_row { grid-template-columns: repeat(2, 1fr) !important; }
+}
+@media (max-width: 900px) {
+    .o_dash_header { flex-direction: column !important; align-items: stretch !important; gap: 16px !important; }
+    .o_dash_filter_row { flex-wrap: wrap !important; gap: 12px !important; }
+    .o_dash_filter_item { flex: 1 1 140px !important; }
+    .o_dash_filter_item .o_field_widget input,
+    .o_dash_filter_item .o_field_widget .o_input { width: 100% !important; min-width: 0 !important; }
+    .o_dash_row2 { grid-template-columns: 1fr !important; }
+}
+@media (max-width: 600px) {
+    .o_dash_kpi_row { grid-template-columns: 1fr !important; gap: 12px !important; }
+    .o_dash_header { padding: 16px 18px !important; border-radius: 10px !important; }
+    .o_dash_brand { font-size: 18px !important; }
+    .o_kpi_inner { padding: 18px 16px 16px !important; }
+    .o_kpi_num { font-size: 34px !important; }
+    .o_dash_fbr_rate { font-size: 38px !important; }
+    .o_dash_card { padding: 16px !important; }
+    .o_dash_tax_row { flex-wrap: wrap !important; }
+    .o_dash_tax_item { flex: 1 1 45% !important; }
+    .o_dash_tax_divider { display: none !important; }
+}
+
+/* ---- Form views: tablet ---- */
+@media (max-width: 900px) {
+    /* Two-column grids collapse to one */
+    .o_form_view .o_cust_grid_2 { grid-template-columns: 1fr !important; }
+
+    /* Customer / item / FBR header: stack avatar above the info card */
+    .o_form_view .o_cust_header {
+        flex-direction: column !important;
+        align-items: stretch !important;
+        gap: 14px !important;
+    }
+    .o_form_view .o_cust_avatar,
+    .o_form_view .o_item_avatar,
+    .o_form_view .o_fbr_log_avatar_success,
+    .o_form_view .o_fbr_log_avatar_failed { margin: 0 auto !important; }
+    .o_form_view .o_cust_active_wrap { margin-left: 0 !important; }
+
+    /* Invoice header: number block above the FBR card */
+    .o_form_view .o_inv_corp_header {
+        flex-direction: column !important;
+        gap: 14px !important;
+    }
+    .o_form_view .o_inv_fbr_inner { width: 100% !important; box-sizing: border-box !important; }
+
+    /* Invoice detail rows: stack the paired fields */
+    .o_form_view .o_inv_detail_row {
+        flex-direction: column !important;
+        gap: 10px !important;
+    }
+    .o_form_view .o_inv_detail_30,
+    .o_form_view .o_inv_detail_70,
+    .o_form_view .o_inv_detail_50,
+    .o_form_view .o_inv_detail_full { flex: 1 1 100% !important; }
+
+    /* Totals card: full width instead of pinned min-width */
+    .o_form_view .o_inv_totals_row { justify-content: stretch !important; }
+    .o_form_view .o_inv_totals_spacer { display: none !important; }
+    .o_form_view .o_inv_totals_card {
+        min-width: 0 !important;
+        width: 100% !important;
+        box-sizing: border-box !important;
+    }
+}
+
+/* ---- Form views: phone ---- */
+@media (max-width: 600px) {
+    .o_form_view .o_cust_name,
+    .o_form_view .o_cust_name .o_field_widget input,
+    .o_form_view .o_cust_name .o_field_widget span { font-size: 20px !important; }
+
+    .o_form_view .o_inv_corp_number,
+    .o_form_view .o_inv_corp_number .o_field_widget span,
+    .o_form_view .o_inv_corp_number .o_field_widget input { font-size: 24px !important; }
+
+    /* Shrink oversized avatars so they don't dominate the phone viewport */
+    .o_form_view .o_cust_avatar,
+    .o_form_view .o_item_avatar,
+    .o_form_view .o_fbr_log_avatar_success,
+    .o_form_view .o_fbr_log_avatar_failed,
+    .o_form_view .o_simple_avatar {
+        width: 64px !important;
+        min-width: 64px !important;
+        height: 64px !important;
+    }
+    .o_form_view .o_cust_avatar::after,
+    .o_form_view .o_item_avatar::after,
+    .o_form_view .o_simple_avatar { font-size: 26px !important; }
+
+    /* Meta chips wrap cleanly */
+    .o_form_view .o_cust_meta_row { gap: 6px !important; }
+
+    /* Cards / totals: reduce inner padding for narrow screens */
+    .o_form_view .o_cust_card,
+    .o_form_view .o_cust_info_card,
+    .o_form_view .o_inv_totals_card { padding: 14px 16px !important; }
+
+    .o_form_view .o_inv_grand_val,
+    .o_form_view .o_inv_grand_val .o_field_widget,
+    .o_form_view .o_inv_grand_val .o_field_widget span { font-size: 17px !important; }
+
+    /* Invoice lines table can overflow horizontally rather than crush */
+    .o_form_view .o_digital_invoice_lines_table { display: block !important; overflow-x: auto !important; }
+}
