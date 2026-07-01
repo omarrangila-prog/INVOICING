@@ -254,7 +254,7 @@ class DigitalInvoice(models.Model):
         }
 
     def action_generate_pdf(self):
-        return self.env.ref('invoicing.action_report_digital_invoice').report_action(self)
+        return self.env.ref('keleven_invoicing.action_report_digital_invoice').report_action(self)
 
     def _get_di_logo(self):
         import base64

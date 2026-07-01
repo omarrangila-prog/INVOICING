@@ -1,7 +1,7 @@
 <?xml version="1.0" encoding="UTF-8"?>
 <templates xml:space="preserve">
 
-    <t t-name="invoicing.InvoiceLineDescriptionField">
+    <t t-name="keleven_invoicing.InvoiceLineDescriptionField">
         <div class="o_invoice_line_description" t-ref="root">
             <t t-if="isDisplayType">
                 <textarea

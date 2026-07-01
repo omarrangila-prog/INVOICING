@@ -98,7 +98,7 @@
                             <div class="o_cust_card_title o_title_blue">&#128196; HS Code &amp; Tax</div>
                             <group>
                                 <field name="hs_code_id" required="1"
-                                       context="{'form_view_ref': 'invoicing.view_item_hs_code_quick_form'}"/>
+                                       context="{'form_view_ref': 'keleven_invoicing.view_item_hs_code_quick_form'}"/>
                                 <field name="hs_description" readonly="1"/>
                             </group>
                         </div>

@@ -25,7 +25,7 @@ import { Component, useState, useRef, onMounted, onPatched } from "@odoo/owl";
  * inline via the native colspan and never call the measure/expand logic.
  */
 export class InvoiceLineDescriptionField extends Component {
-    static template = "invoicing.InvoiceLineDescriptionField";
+    static template = "keleven_invoicing.InvoiceLineDescriptionField";
     static props = {
         ...Component.props,
         record: { type: Object },

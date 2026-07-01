@@ -1,13 +1,13 @@
 /* Dashboard-specific JavaScript */
 
-odoo.define('invoicing.dashboard_widget', function (require) {
+odoo.define('keleven_invoicing.dashboard_widget', function (require) {
     'use strict';
 
     var Widget = require('web.Widget');
     var rpc = require('web.rpc');
 
     var DashboardWidget = Widget.extend({
-        template: 'invoicing.dashboard_widget',
+        template: 'keleven_invoicing.dashboard_widget',
 
         start: function () {
             var self = this;

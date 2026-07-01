@@ -1,5 +1,5 @@
 {
-    'name': 'Keleven Digital Invoicing System',
+    'name': 'Keleven Digital Invoicing',
     'version': '19.0.1.0.0',
     'category': 'Accounting/Invoicing',
     'sequence': 1,
@@ -49,17 +49,17 @@
     ],
     'assets': {
         'web.assets_backend': [
-            'invoicing/static/src/css/dashboard.css',
-            'invoicing/static/src/css/invoicing.css',
-            'invoicing/static/src/js/invoicing.js',
-            'invoicing/static/src/js/dashboard.js',
-            'invoicing/static/src/js/invoice_line_description.js',
-            'invoicing/static/src/xml/invoice_line_description.xml',
+            'keleven_invoicing/static/src/css/dashboard.css',
+            'keleven_invoicing/static/src/css/invoicing.css',
+            'keleven_invoicing/static/src/js/invoicing.js',
+            'keleven_invoicing/static/src/js/dashboard.js',
+            'keleven_invoicing/static/src/js/invoice_line_description.js',
+            'keleven_invoicing/static/src/xml/invoice_line_description.xml',
         ],
     },
     'installable': True,
     'application': True,
     'auto_install': False,
-    'icon': '/invoicing/static/description/icon.png',
+    'icon': '/keleven_invoicing/static/description/icon.png',
     'images': ['static/description/icon.png'],
 }
