@@ -1,0 +1,446 @@
+<?xml version="1.0" encoding="utf-8"?>
+<odoo>
+    <data noupdate="1">
+
+        <record id="uom_001" model="item.uom">
+            <field name="name">Numbers</field>
+            <field name="active" eval="True"/>
+        </record>
+
+        <record id="uom_002" model="item.uom">
+            <field name="name">Numbers, pieces, units</field>
+            <field name="active" eval="True"/>
+        </record>
+
+        <record id="uom_003" model="item.uom">
+            <field name="name">KWH</field>
+            <field name="active" eval="True"/>
+        </record>
+
+        <record id="uom_004" model="item.uom">
+            <field name="name">SET</field>
+            <field name="active" eval="True"/>
+        </record>
+
+        <record id="uom_005" model="item.uom">
+            <field name="name">MT</field>
+            <field name="active" eval="True"/>
+        </record>
+
+        <record id="uom_006" model="item.uom">
+            <field name="name">Bill of lading</field>
+            <field name="active" eval="True"/>
+        </record>
+
+        <record id="uom_007" model="item.uom">
+            <field name="name">Pcs</field>
+            <field name="active" eval="True"/>
+        </record>
+
+        <record id="uom_008" model="item.uom">
+            <field name="name">40KG</field>
+            <field name="active" eval="True"/>
+        </record>
+
+        <record id="uom_009" model="item.uom">
+            <field name="name">Liter</field>
+            <field name="active" eval="True"/>
+        </record>
+
+        <record id="uom_010" model="item.uom">
+            <field name="name">SqY</field>
+            <field name="active" eval="True"/>
+        </record>
+
+        <record id="uom_011" model="item.uom">
+            <field name="name">Bag</field>
+            <field name="active" eval="True"/>
+        </record>
+
+        <record id="uom_012" model="item.uom">
+            <field name="name">KG</field>
+            <field name="active" eval="True"/>
+        </record>
+
+        <record id="uom_013" model="item.uom">
+            <field name="name">MMBTU</field>
+            <field name="active" eval="True"/>
+        </record>
+
+        <record id="uom_014" model="item.uom">
+            <field name="name">Meter</field>
+            <field name="active" eval="True"/>
+        </record>
+
+        <record id="uom_015" model="item.uom">
+            <field name="name">Carat</field>
+            <field name="active" eval="True"/>
+        </record>
+
+        <record id="uom_016" model="item.uom">
+            <field name="name">Cubic Metre</field>
+            <field name="active" eval="True"/>
+        </record>
+
+        <record id="uom_017" model="item.uom">
+            <field name="name">Dozen</field>
+            <field name="active" eval="True"/>
+        </record>
+
+        <record id="uom_018" model="item.uom">
+            <field name="name">Gram</field>
+            <field name="active" eval="True"/>
+        </record>
+
+        <record id="uom_019" model="item.uom">
+            <field name="name">Gallon</field>
+            <field name="active" eval="True"/>
+        </record>
+
+        <record id="uom_020" model="item.uom">
+            <field name="name">Kilogram</field>
+            <field name="active" eval="True"/>
+        </record>
+
+        <record id="uom_021" model="item.uom">
+            <field name="name">Pound</field>
+            <field name="active" eval="True"/>
+        </record>
+
+        <record id="uom_022" model="item.uom">
+            <field name="name">Timber Logs</field>
+            <field name="active" eval="True"/>
+        </record>
+
+        <record id="uom_023" model="item.uom">
+            <field name="name">Packs</field>
+            <field name="active" eval="True"/>
+        </record>
+
+        <record id="uom_024" model="item.uom">
+            <field name="name">Pair</field>
+            <field name="active" eval="True"/>
+        </record>
+
+        <record id="uom_025" model="item.uom">
+            <field name="name">Square Foot</field>
+            <field name="active" eval="True"/>
+        </record>
+
+        <record id="uom_026" model="item.uom">
+            <field name="name">Square Metre</field>
+            <field name="active" eval="True"/>
+        </record>
+
+        <record id="uom_027" model="item.uom">
+            <field name="name">Thousand Unit</field>
+            <field name="active" eval="True"/>
+        </record>
+
+        <record id="uom_028" model="item.uom">
+            <field name="name">Mega Watt</field>
+            <field name="active" eval="True"/>
+        </record>
+
+        <record id="uom_029" model="item.uom">
+            <field name="name">Foot</field>
+            <field name="active" eval="True"/>
+        </record>
+
+        <record id="uom_030" model="item.uom">
+            <field name="name">Barrels</field>
+            <field name="active" eval="True"/>
+        </record>
+
+        <record id="uom_031" model="item.uom">
+            <field name="name">NO</field>
+            <field name="active" eval="True"/>
+        </record>
+
+        <record id="uom_032" model="item.uom">
+            <field name="name">Others</field>
+            <field name="active" eval="True"/>
+        </record>
+
+        <record id="uom_033" model="item.uom">
+            <field name="name">1000 kWh</field>
+            <field name="active" eval="True"/>
+        </record>
+
+        <record id="uom_034" model="item.uom">
+            <field name="name">Ac</field>
+            <field name="active" eval="True"/>
+        </record>
+
+        <record id="uom_035" model="item.uom">
+            <field name="name">Bal</field>
+            <field name="active" eval="True"/>
+        </record>
+
+        <record id="uom_036" model="item.uom">
+            <field name="name">Bim</field>
+            <field name="active" eval="True"/>
+        </record>
+
+        <record id="uom_037" model="item.uom">
+            <field name="name">Bkt</field>
+            <field name="active" eval="True"/>
+        </record>
+
+        <record id="uom_038" model="item.uom">
+            <field name="name">Bnd</field>
+            <field name="active" eval="True"/>
+        </record>
+
+        <record id="uom_039" model="item.uom">
+            <field name="name">Bot</field>
+            <field name="active" eval="True"/>
+        </record>
+
+        <record id="uom_040" model="item.uom">
+            <field name="name">Box</field>
+            <field name="active" eval="True"/>
+        </record>
+
+        <record id="uom_041" model="item.uom">
+            <field name="name">Bwl</field>
+            <field name="active" eval="True"/>
+        </record>
+
+        <record id="uom_042" model="item.uom">
+            <field name="name">Can</field>
+            <field name="active" eval="True"/>
+        </record>
+
+        <record id="uom_043" model="item.uom">
+            <field name="name">Cm</field>
+            <field name="active" eval="True"/>
+        </record>
+
+        <record id="uom_044" model="item.uom">
+            <field name="name">Col</field>
+            <field name="active" eval="True"/>
+        </record>
+
+        <record id="uom_045" model="item.uom">
+            <field name="name">COR</field>
+            <field name="active" eval="True"/>
+        </record>
+
+        <record id="uom_046" model="item.uom">
+            <field name="name">Crt</field>
+            <field name="active" eval="True"/>
+        </record>
+
+        <record id="uom_047" model="item.uom">
+            <field name="name">Cs</field>
+            <field name="active" eval="True"/>
+        </record>
+
+        <record id="uom_048" model="item.uom">
+            <field name="name">Ctn</field>
+            <field name="active" eval="True"/>
+        </record>
+
+        <record id="uom_049" model="item.uom">
+            <field name="name">Doz</field>
+            <field name="active" eval="True"/>
+        </record>
+
+        <record id="uom_050" model="item.uom">
+            <field name="name">Drm</field>
+            <field name="active" eval="True"/>
+        </record>
+
+        <record id="uom_051" model="item.uom">
+            <field name="name">Dus</field>
+            <field name="active" eval="True"/>
+        </record>
+
+        <record id="uom_052" model="item.uom">
+            <field name="name">Ech</field>
+            <field name="active" eval="True"/>
+        </record>
+
+        <record id="uom_053" model="item.uom">
+            <field name="name">Ft</field>
+            <field name="active" eval="True"/>
+        </record>
+
+        <record id="uom_054" model="item.uom">
+            <field name="name">Gln</field>
+            <field name="active" eval="True"/>
+        </record>
+
+        <record id="uom_055" model="item.uom">
+            <field name="name">Grm</field>
+            <field name="active" eval="True"/>
+        </record>
+
+        <record id="uom_056" model="item.uom">
+            <field name="name">Grs</field>
+            <field name="active" eval="True"/>
+        </record>
+
+        <record id="uom_057" model="item.uom">
+            <field name="name">Inc</field>
+            <field name="active" eval="True"/>
+        </record>
+
+        <record id="uom_058" model="item.uom">
+            <field name="name">Jar</field>
+            <field name="active" eval="True"/>
+        </record>
+
+        <record id="uom_059" model="item.uom">
+            <field name="name">Kgs</field>
+            <field name="active" eval="True"/>
+        </record>
+
+        <record id="uom_060" model="item.uom">
+            <field name="name">Kit</field>
+            <field name="active" eval="True"/>
+        </record>
+
+        <record id="uom_061" model="item.uom">
+            <field name="name">Kon</field>
+            <field name="active" eval="True"/>
+        </record>
+
+        <record id="uom_062" model="item.uom">
+            <field name="name">Lbs</field>
+            <field name="active" eval="True"/>
+        </record>
+
+        <record id="uom_063" model="item.uom">
+            <field name="name">Lch</field>
+            <field name="active" eval="True"/>
+        </record>
+
+        <record id="uom_064" model="item.uom">
+            <field name="name">Lot</field>
+            <field name="active" eval="True"/>
+        </record>
+
+        <record id="uom_065" model="item.uom">
+            <field name="name">Lri</field>
+            <field name="active" eval="True"/>
+        </record>
+
+        <record id="uom_066" model="item.uom">
+            <field name="name">Lth</field>
+            <field name="active" eval="True"/>
+        </record>
+
+        <record id="uom_067" model="item.uom">
+            <field name="name">Ltr</field>
+            <field name="active" eval="True"/>
+        </record>
+
+        <record id="uom_068" model="item.uom">
+            <field name="name">Mgm</field>
+            <field name="active" eval="True"/>
+        </record>
+
+        <record id="uom_069" model="item.uom">
+            <field name="name">Ml</field>
+            <field name="active" eval="True"/>
+        </record>
+
+        <record id="uom_070" model="item.uom">
+            <field name="name">Mm</field>
+            <field name="active" eval="True"/>
+        </record>
+
+        <record id="uom_071" model="item.uom">
+            <field name="name">Mtr</field>
+            <field name="active" eval="True"/>
+        </record>
+
+        <record id="uom_072" model="item.uom">
+            <field name="name">Pkt</field>
+            <field name="active" eval="True"/>
+        </record>
+
+        <record id="uom_073" model="item.uom">
+            <field name="name">Plat</field>
+            <field name="active" eval="True"/>
+        </record>
+
+        <record id="uom_074" model="item.uom">
+            <field name="name">Prs</field>
+            <field name="active" eval="True"/>
+        </record>
+
+        <record id="uom_075" model="item.uom">
+            <field name="name">Pta</field>
+            <field name="active" eval="True"/>
+        </record>
+
+        <record id="uom_076" model="item.uom">
+            <field name="name">Rft</field>
+            <field name="active" eval="True"/>
+        </record>
+
+        <record id="uom_077" model="item.uom">
+            <field name="name">Roll</field>
+            <field name="active" eval="True"/>
+        </record>
+
+        <record id="uom_078" model="item.uom">
+            <field name="name">Set</field>
+            <field name="active" eval="True"/>
+        </record>
+
+        <record id="uom_079" model="item.uom">
+            <field name="name">Sgl</field>
+            <field name="active" eval="True"/>
+        </record>
+
+        <record id="uom_080" model="item.uom">
+            <field name="name">Sht</field>
+            <field name="active" eval="True"/>
+        </record>
+
+        <record id="uom_081" model="item.uom">
+            <field name="name">Sqf</field>
+            <field name="active" eval="True"/>
+        </record>
+
+        <record id="uom_082" model="item.uom">
+            <field name="name">Sqy</field>
+            <field name="active" eval="True"/>
+        </record>
+
+        <record id="uom_083" model="item.uom">
+            <field name="name">Stp</field>
+            <field name="active" eval="True"/>
+        </record>
+
+        <record id="uom_084" model="item.uom">
+            <field name="name">Tbe</field>
+            <field name="active" eval="True"/>
+        </record>
+
+        <record id="uom_085" model="item.uom">
+            <field name="name">Tin</field>
+            <field name="active" eval="True"/>
+        </record>
+
+        <record id="uom_086" model="item.uom">
+            <field name="name">TOL</field>
+            <field name="active" eval="True"/>
+        </record>
+
+        <record id="uom_087" model="item.uom">
+            <field name="name">Tub</field>
+            <field name="active" eval="True"/>
+        </record>
+
+        <record id="uom_088" model="item.uom">
+            <field name="name">Yrd</field>
+            <field name="active" eval="True"/>
+        </record>
+
+    </data>
+</odoo>

@@ -1,0 +1,390 @@
+<?xml version="1.0" encoding="utf-8"?>
+<odoo>
+
+    <!-- Invoice List View -->
+    <record id="view_digital_invoice_tree" model="ir.ui.view">
+        <field name="name">digital.invoice.tree</field>
+        <field name="model">digital.invoice</field>
+        <field name="arch" type="xml">
+            <list string="Digital Invoices"
+                  decoration-success="state == 'posted'"
+                  decoration-info="state == 'validated'"
+                  decoration-muted="state == 'cancelled'">
+                <field name="bill_no" string="Invoice No"/>
+                <field name="invoice_date" string="Date"/>
+                <field name="buyer_id" string="Buyer"/>
+                <field name="subtotal" string="Subtotal" optional="show"/>
+                <field name="fbr_net_total" string="Net Amount (Regulatory)" optional="show"/>
+                <field name="tax_amount" string="Tax" optional="show"/>
+                <field name="grand_total" string="Grand Total"/>
+                <field name="state" widget="badge"
+                       decoration-success="state == 'posted'"
+                       decoration-info="state == 'validated'"
+                       decoration-warning="state == 'draft'"
+                       decoration-danger="state == 'cancelled'"/>
+            </list>
+        </field>
+    </record>
+
+    <!-- Invoice Form View -->
+    <record id="view_digital_invoice_form" model="ir.ui.view">
+        <field name="name">digital.invoice.form</field>
+        <field name="model">digital.invoice</field>
+        <field name="arch" type="xml">
+            <form string="Digital Invoice">
+                <header>
+                    <button name="action_fbr_validate" string="Validate FBR" type="object"
+                            class="btn-secondary" invisible="state != 'draft'"
+                            data-hotkey="v" save="true"/>
+                    <button name="action_fbr_post" string="Post to FBR" type="object"
+                            class="oe_highlight"
+                            confirm="Are you sure you want to post this invoice to FBR?"
+                            data-hotkey="p" save="true"
+                            invisible="state != 'validated' or not fbr_validated"/>
+                    <button name="action_generate_pdf" string="Generate PDF" type="object"
+                            class="oe_highlight" invisible="state != 'posted'"/>
+                    <field name="state" widget="statusbar"
+                           statusbar_visible="draft,validated,posted,cancelled"/>
+                </header>
+                <sheet>
+
+                    <!-- Ribbons -->
+                    <widget name="web_ribbon" title="SANDBOX / TEST" bg_color="bg-warning"
+                            invisible="not company_is_sandbox"/>
+                    <widget name="web_ribbon" title="PRODUCTION / LIVE" bg_color="bg-success"
+                            invisible="company_is_sandbox"/>
+
+                    <!-- ===== CORPORATE HEADER ===== -->
+                    <div class="o_inv_corp_header">
+
+                        <!-- Left: Invoice badge + number -->
+                        <div class="o_inv_corp_left">
+                            <div class="o_inv_corp_badge">INVOICE</div>
+                            <div class="o_inv_corp_number">
+                                <field name="bill_no" readonly="1"/>
+                            </div>
+                        </div>
+
+                        <!-- Center: FBR card (only when posted) -->
+                        <div class="o_inv_fbr_card" invisible="not fbr_id">
+                            <div class="o_inv_fbr_inner">
+                                <div class="o_inv_fbr_text">
+                                    <div class="o_inv_fbr_label">FBR Reference</div>
+                                    <div class="o_inv_fbr_ref">
+                                        <field name="fbr_id" readonly="1" nolabel="1"/>
+                                    </div>
+                                    <div class="o_inv_fbr_meta" invisible="not fbr_date">
+                                        <span>Date: </span>
+                                        <field name="fbr_date" readonly="1" nolabel="1"/>
+                                    </div>
+                                    <div class="o_inv_fbr_meta" invisible="not fbr_environment">
+                                        <span>Posted via: </span>
+                                        <field name="fbr_environment" readonly="1" nolabel="1"
+                                               widget="badge"
+                                               decoration-success="fbr_environment == 'production'"
+                                               decoration-warning="fbr_environment == 'sandbox'"/>
+                                    </div>
+                                </div>
+                                <div class="o_inv_fbr_qr" invisible="not fbr_id">
+                                    <field name="fbr_qr_code" widget="image" nolabel="1"
+                                           readonly="1" options="{'size': [90, 90]}"/>
+                                </div>
+                            </div>
+                        </div>
+
+                        <!-- Right: spacer for ribbon -->
+                        <div style="min-width:130px;"/>
+
+                    </div>
+
+                    <div class="o_cust_divider"/>
+
+                    <!-- ===== INVOICE DETAILS ===== -->
+                    <div class="o_cust_card">
+                        <div class="o_cust_card_title">&#128196; Invoice Details</div>
+
+                        <!-- Line 1: Date (30%) + Scenario (70%) -->
+                        <div class="o_inv_detail_row">
+                            <div class="o_inv_detail_30">
+                                <div class="o_inv_field_label">Date</div>
+                                <field name="invoice_date" required="1" nolabel="1"/>
+                            </div>
+                            <div class="o_inv_detail_70">
+                                <div class="o_inv_field_label">Scenario</div>
+                                <field name="scenario_id" nolabel="1" options="{'no_create': True}"/>
+                            </div>
+                        </div>
+
+                        <!-- Line 2: Buyer (full width) -->
+                        <div class="o_inv_detail_row">
+                            <div class="o_inv_detail_full">
+                                <div class="o_inv_field_label">Buyer</div>
+                                <field name="buyer_id" required="1" nolabel="1"/>
+                            </div>
+                        </div>
+
+                        <!-- Line 3: Reference + Currency -->
+                        <div class="o_inv_detail_row">
+                            <div class="o_inv_detail_50">
+                                <div class="o_inv_field_label">Reference</div>
+                                <field name="reference" nolabel="1"/>
+                            </div>
+                            <div class="o_inv_detail_50">
+                                <div class="o_inv_field_label">Currency</div>
+                                <field name="currency_id" required="1" nolabel="1"/>
+                            </div>
+                        </div>
+
+                    </div>
+
+                    <div class="o_cust_divider"/>
+
+                    <!-- ===== SCENARIO DETAILS ===== -->
+                    <div class="o_cust_card o_cust_card_blue" invisible="not scenario_id">
+                        <div class="o_cust_card_title o_title_blue">&#128203; Scenario Details</div>
+                        <div class="o_cust_grid_2">
+                            <group>
+                                <field name="scenario_id" readonly="1" string="Code"
+                                       options="{'no_open': True, 'no_create': True}"/>
+                                <field name="scenario_description" readonly="1" string="Description"/>
+                                <field name="scenario_sales_type" readonly="1" string="Sales Type"/>
+                                <field name="scenario_tax_rate" readonly="1" string="Tax Rate (%)"/>
+                            </group>
+                            <group>
+                                <field name="scenario_sro_schedule" readonly="1" string="SRO Schedule"/>
+                                <field name="scenario_sro_serial_no" readonly="1" string="SRO Serial No"/>
+                            </group>
+                        </div>
+                    </div>
+
+                    <div class="o_cust_divider" invisible="not scenario_id"/>
+
+                    <!-- ===== BUYER INFORMATION ===== -->
+                    <div class="o_cust_card o_cust_card_green" invisible="not buyer_id">
+                        <div class="o_cust_card_title o_title_green">&#128101; Buyer Information</div>
+                        <div class="o_cust_grid_2">
+                            <group>
+                                <field name="buyer_ntn" readonly="1"/>
+                                <field name="buyer_province" readonly="1"/>
+                                <field name="buyer_stn" readonly="1"/>
+                                <field name="buyer_address" readonly="1"/>
+                            </group>
+                            <group>
+                                <field name="buyer_registration_type" readonly="1"/>
+                                <field name="buyer_phone" readonly="1"/>
+                                <field name="buyer_email" readonly="1"/>
+                            </group>
+                        </div>
+                    </div>
+
+                    <div class="o_cust_divider" invisible="not buyer_id"/>
+
+                    <!-- ===== INVOICE LINES ===== -->
+                    <div class="o_inv_lines_header">
+                        <span class="o_cust_card_title" style="font-size:12px;">&#128221; Invoice Line Items</span>
+                    </div>
+                    <field name="invoice_line_ids" widget="section_and_note_one2many">
+                        <list editable="bottom" class="o_digital_invoice_lines_table">
+                            <control>
+                                <create string="Add a product"/>
+                                <create string="Add a section" context="{'default_display_type': 'line_section'}"/>
+                                <create string="Add a note" context="{'default_display_type': 'line_note'}"/>
+                            </control>
+                            <field name="sequence" widget="handle"/>
+                            <field name="display_type" column_invisible="1"/>
+                            <field name="product_id" required="not display_type" invisible="display_type"/>
+                            <field name="name" string="" widget="invoice_line_description"/>
+                            <!-- <field name="name" string="" widget="section_and_note_text"
+                                   invisible="not display_type"/>
+                            <field name="line_description" string="" widget="invoice_line_description"
+                                   invisible="display_type" optional="show"/> -->
+                            <field name="hs_code" invisible="display_type"/>
+                            <field name="quantity" required="not display_type" invisible="display_type"/>
+                            <field name="uom" invisible="display_type"/>
+                            <field name="price" required="not display_type" invisible="display_type"/>
+                            <field name="tax_rate" invisible="display_type"/>
+                            <field name="further_tax_rate" readonly="parent.is_sn001"
+                                   invisible="display_type" optional="show"/>
+                            <field name="tax_exclusive" readonly="1" invisible="display_type"/>
+                            <field name="tax_amount" readonly="1" invisible="display_type"/>
+                            <field name="further_tax_amount" readonly="1" invisible="display_type"/>
+                            <field name="net_amount" readonly="1" invisible="display_type"/>
+                            <field name="sale_type" invisible="display_type"/>
+                            <field name="sro_schedule" invisible="display_type"/>
+                            <field name="fbr_uom" string="Regulatory UOM" readonly="1"
+                                   invisible="display_type" optional="hide"/>
+                            <field name="fbr_uom_rate" string="Rate/Regulatory UOM"
+                                   invisible="display_type" optional="hide"/>
+                            <field name="fbr_quantity" string="Regulatory Qty"
+                                   invisible="display_type" optional="hide"/>
+                            <field name="fbr_gross_amount" string="Regulatory Gross Amount" readonly="1"
+                                   invisible="display_type" optional="hide"/>
+                            <field name="fbr_tax_amount" string="Regulatory Tax Amount" readonly="1"
+                                   invisible="display_type" optional="hide"/>
+                            <field name="fbr_further_tax_amount" string="Regulatory Further Tax Amount"
+                                   readonly="1" invisible="display_type" optional="hide"/>
+                            <field name="fbr_net_amount" string="Regulatory Net Amount" readonly="1"
+                                   invisible="display_type" optional="hide"/>
+                        </list>
+                    </field>
+
+                    <div class="o_cust_divider"/>
+
+                    <!-- ===== TOTALS ===== -->
+                    <div class="o_inv_totals_row">
+                        <div class="o_inv_totals_spacer"/>
+                        <div class="o_inv_totals_card">
+                            <div class="o_cust_card_title">&#128179; Summary</div>
+                            <div class="o_inv_total_line">
+                                <span class="o_inv_total_label">Subtotal</span>
+                                <span class="o_inv_total_val">
+                                    <field name="subtotal" readonly="1" nolabel="1"/>
+                                </span>
+                            </div>
+                            <div class="o_inv_total_line">
+                                <span class="o_inv_total_label">GST</span>
+                                <span class="o_inv_total_val">
+                                    <field name="gst_amount" readonly="1" nolabel="1"/>
+                                </span>
+                            </div>
+                            <div class="o_inv_total_line">
+                                <span class="o_inv_total_label">FST</span>
+                                <span class="o_inv_total_val">
+                                    <field name="fst_amount" readonly="1" nolabel="1"/>
+                                </span>
+                            </div>
+                            <div class="o_inv_total_divider"/>
+                            <div class="o_inv_total_line o_inv_grand_total">
+                                <span class="o_inv_total_label">Grand Total</span>
+                                <span class="o_inv_grand_val">
+                                    <field name="grand_total" readonly="1" nolabel="1"/>
+                                </span>
+                            </div>
+                        </div>
+                    </div>
+
+                    <div class="o_cust_divider"/>
+
+                    <!-- ===== NOTES ===== -->
+                    <div class="o_cust_card">
+                        <div class="o_cust_card_title">&#128221; Additional Notes</div>
+                        <field name="edit_note" nolabel="1"
+                               placeholder="Add any internal notes here..."/>
+                    </div>
+
+                </sheet>
+            </form>
+        </field>
+    </record>
+
+    <!-- Buyer List View -->
+    <record id="view_digital_buyer_tree" model="ir.ui.view">
+        <field name="name">digital.buyer.tree</field>
+        <field name="model">digital.buyer</field>
+        <field name="arch" type="xml">
+            <list string="Buyers">
+                <field name="name"/>
+                <field name="ntn"/>
+                <field name="registration_type"/>
+                <field name="province"/>
+                <field name="active"/>
+            </list>
+        </field>
+    </record>
+
+    <!-- Buyer Form View -->
+    <record id="view_digital_buyer_form" model="ir.ui.view">
+        <field name="name">digital.buyer.form</field>
+        <field name="model">digital.buyer</field>
+        <field name="arch" type="xml">
+            <form string="Buyer">
+                <sheet>
+                    <div class="oe_title">
+                        <h1><field name="name" required="1"/></h1>
+                    </div>
+                    <group>
+                        <group string="Personal Information">
+                            <field name="ntn"/>
+                            <field name="cnic"/>
+                            <field name="stn"/>
+                        </group>
+                        <group string="Business Information">
+                            <field name="registration_type"/>
+                            <field name="province"/>
+                            <field name="active"/>
+                        </group>
+                    </group>
+                    <group string="Contact Information">
+                        <group>
+                            <field name="phone"/>
+                            <field name="email"/>
+                        </group>
+                    </group>
+                    <separator string="Address"/>
+                    <field name="address" nolabel="1"/>
+                </sheet>
+            </form>
+        </field>
+    </record>
+
+    <!-- Scenario List View -->
+    <record id="view_digital_scenario_tree" model="ir.ui.view">
+        <field name="name">digital.scenario.tree</field>
+        <field name="model">digital.scenario</field>
+        <field name="arch" type="xml">
+            <list string="Scenarios" decoration-muted="not active"
+                  create="false" delete="false" edit="false">
+                <field name="name" string="Code"/>
+                <field name="description" string="Description"/>
+                <field name="sales_type" string="Sales Type"/>
+                <field name="tax_rate" string="Tax Rate (%)"/>
+                <field name="sro_schedule" string="SRO Schedule"/>
+                <field name="sro_serial_no" string="Serial No"/>
+                <field name="active" invisible="1"/>
+            </list>
+        </field>
+    </record>
+
+    <!-- Scenario Form View -->
+    <record id="view_digital_scenario_form" model="ir.ui.view">
+        <field name="name">digital.scenario.form</field>
+        <field name="model">digital.scenario</field>
+        <field name="arch" type="xml">
+            <form string="Scenario" create="false" delete="false" edit="false">
+                <sheet>
+                    <div class="oe_title">
+                        <label for="name"/>
+                        <h1><field name="name" placeholder="Scenario Code (e.g. SN001)"/></h1>
+                    </div>
+                    <group>
+                        <field name="description"/>
+                        <field name="active"/>
+                    </group>
+                    <group string="FBR Details">
+                        <group>
+                            <field name="sales_type"/>
+                            <field name="tax_rate"/>
+                        </group>
+                        <group>
+                            <field name="sro_schedule"/>
+                            <field name="sro_serial_no"/>
+                        </group>
+                    </group>
+                </sheet>
+            </form>
+        </field>
+    </record>
+
+    <!-- Scenario Search View -->
+    <record id="view_digital_scenario_search" model="ir.ui.view">
+        <field name="name">digital.scenario.search</field>
+        <field name="model">digital.scenario</field>
+        <field name="arch" type="xml">
+            <search string="Search Scenarios">
+                <field name="name" string="Code"/>
+                <field name="description" string="Description"/>
+            </search>
+        </field>
+    </record>
+
+</odoo>

@@ -1,0 +1,230 @@
+<?xml version="1.0" encoding="utf-8"?>
+<odoo>
+
+    <template id="report_digital_invoice">
+        <t t-call="web.html_container">
+        <t t-set="data_report_margin_top" t-value="5"/>
+        <style>
+            @page { margin: 10mm 20mm 10mm 20mm; }
+            body { margin: 0 !important; padding: 0 !important; }
+            .container { max-width: 100% !important; padding: 0 !important; }
+        </style>
+            <t t-foreach="docs" t-as="doc">
+                <t t-set="di_logo_b64" t-value="doc._get_di_logo()"/>
+                <div style="font-family:Arial,sans-serif; font-size:11px; padding:0 25px; margin:0;">
+
+                    <!-- ROW 1: Company Logo top-left -->
+                    <div style="margin-bottom:8px;">
+                        <img t-if="doc.company_id.logo_web"
+                             t-att-src="image_data_uri(doc.company_id.logo_web)"
+                             style="height:55px; width:auto;" alt="Logo"/>
+                    </div>
+
+                    <!-- ROW 2: Left 80% (Company Info + Invoice Title stacked) | Right 20% (DI Logo + QR) -->
+                    <div style="display:flex; border-bottom:2px solid #333; padding-bottom:10px; margin-bottom:14px;">
+
+                        <!-- Left 80%: Company Info then Invoice Number below -->
+                        <div style="flex:0 0 80%; padding-right:15px;">
+
+                            <!-- Company Info -->
+                            <div style="font-size:11px; color:#333; margin-bottom:10px;">
+                                <strong style="font-size:13px; display:block; margin-bottom:3px;">
+                                    <t t-esc="doc.company_id.name"/>
+                                </strong>
+                                <span t-field="doc.company_id.partner_id"
+                                      t-options='{"widget": "contact", "fields": ["address"], "no_marker": true}'/>
+                                <t t-if="doc.company_id.phone"><div>Phone: <t t-esc="doc.company_id.phone"/></div></t>
+                                <t t-if="doc.company_id.email"><div>Email: <t t-esc="doc.company_id.email"/></div></t>
+                                <t t-if="doc.company_id.vat"><div>NTN: <t t-esc="doc.company_id.vat"/></div></t>
+                            </div>
+
+                            <!-- Invoice Title below company info -->
+                            <div style="border-top:1px solid #ddd; padding-top:8px;">
+                                <h2 style="font-size:22px; font-weight:700; margin:0 0 5px 0; color:#333;">
+                                    <span t-field="doc.bill_no"/>
+                                </h2>
+                                <div style="margin:3px 0; font-size:11px;">
+                                    <strong>Date:</strong> <span t-field="doc.invoice_date"/>
+                                    <strong style="margin-left:12px;">Status:</strong> <span t-field="doc.state"/>
+                                </div>
+                                <div t-if="doc.fbr_id" style="margin:3px 0; color:#555; font-size:11px;">
+                                    <strong>FBR Ref:</strong> <span t-field="doc.fbr_id"/>
+                                </div>
+                                <div t-if="doc.fbr_date" style="margin:3px 0; color:#555; font-size:11px;">
+                                    <strong>FBR Date:</strong> <span t-field="doc.fbr_date"/>
+                                </div>
+                            </div>
+
+                        </div>
+
+                        <!-- Right 20%: DI Logo + QR -->
+                        <div style="flex:0 0 20%; text-align:center; padding-left:5px;">
+                            <img t-if="di_logo_b64"
+                                 t-att-src="'data:image/png;base64,' + di_logo_b64"
+                                 style="height:55px; width:auto; display:block; margin:0 auto 5px;" alt="FBR DI"/>
+                            <div t-if="doc.fbr_qr_report">
+                                <img t-att-src="'data:image/png;base64,' + (doc.fbr_qr_report or '')"
+                                     style="width:72px; height:72px;" alt="QR"/>
+                                <div style="font-size:8px; color:#888; margin-top:2px;">Scan to verify</div>
+                            </div>
+                        </div>
+
+                    </div>
+
+                    <!-- Buyer Information -->
+                    <div style="display:flex; margin-bottom:14px;">
+                        <div style="flex:1; padding-right:15px;">
+                            <strong style="display:block; margin-bottom:3px;">Buyer Information:</strong>
+                            <div><span t-field="doc.buyer_id.name"/></div>
+                            <div>NTN/CNIC: <span t-field="doc.buyer_id.ntn"/></div>
+                            <div>Province: <span t-field="doc.buyer_id.province"/></div>
+                            <div><span t-field="doc.buyer_id.address"/></div>
+                        </div>
+                        <div style="flex:1;">
+                            <strong style="display:block; margin-bottom:3px;">Additional Information:</strong>
+                            <div>Registration Type: <span t-field="doc.buyer_id.registration_type"/></div>
+                            <div>Phone: <span t-field="doc.buyer_id.phone"/></div>
+                            <div>Email: <span t-field="doc.buyer_id.email"/></div>
+                            <div>Reference: <span t-field="doc.reference"/></div>
+                        </div>
+                    </div>
+
+                    <!-- Invoice Lines -->
+                    <table style="width:100%; border-collapse:collapse; font-size:10px; margin-bottom:14px;">
+                        <thead>
+                            <tr style="background:#333; color:white;">
+                                <th style="padding:6px 4px; text-align:left;">Item</th>
+                                <th style="padding:6px 4px; text-align:left;">HS Code</th>
+                                <th style="padding:6px 4px; text-align:center;">Qty</th>
+                                <th style="padding:6px 4px; text-align:left;">UOM</th>
+                                <th style="padding:6px 4px; text-align:right;">Price</th>
+                                <th style="padding:6px 4px; text-align:right;">Tax %</th>
+                                <th style="padding:6px 4px; text-align:right;">Excl. Tax</th>
+                                <th style="padding:6px 4px; text-align:right;">Tax Amt</th>
+                                <th style="padding:6px 4px; text-align:right;">Net Amt</th>
+                            </tr>
+                        </thead>
+                        <tbody>
+                            <t t-foreach="doc.invoice_line_ids" t-as="line">
+                                <tr t-if="line.display_type"
+                                    t-attf-style="background:{{ 'white' if line_index % 2 == 0 else '#f8f8f8' }};">
+                                    <td colspan="9"
+                                        t-attf-style="padding:5px 4px; border-bottom:1px solid #eee; #{'font-weight:700;' if line.display_type == 'line_section' else 'font-style:italic; color:#666;'}">
+                                        <span t-field="line.name"/>
+                                    </td>
+                                </tr>
+                                <tr t-if="not line.display_type"
+                                    t-attf-style="background:{{ 'white' if line_index % 2 == 0 else '#f8f8f8' }};">
+                                    <td style="padding:5px 4px; border-bottom:1px solid #eee;"><span t-field="line.product_id"/></td>
+                                    <td style="padding:5px 4px; border-bottom:1px solid #eee;"><span t-field="line.hs_code"/></td>
+                                    <td style="padding:5px 4px; border-bottom:1px solid #eee; text-align:center;"><span t-field="line.quantity"/></td>
+                                    <td style="padding:5px 4px; border-bottom:1px solid #eee;"><span t-field="line.uom"/></td>
+                                    <td style="padding:5px 4px; border-bottom:1px solid #eee; text-align:right;"><span t-esc="'%.2f' % line.price"/></td>
+                                    <td style="padding:5px 4px; border-bottom:1px solid #eee; text-align:right;"><span t-esc="'%.2f' % line.tax_rate"/></td>
+                                    <td style="padding:5px 4px; border-bottom:1px solid #eee; text-align:right;"><span t-esc="'%.2f' % line.tax_exclusive"/></td>
+                                    <td style="padding:5px 4px; border-bottom:1px solid #eee; text-align:right;"><span t-esc="'%.2f' % line.tax_amount"/></td>
+                                    <td style="padding:5px 4px; border-bottom:1px solid #eee; text-align:right;"><span t-esc="'%.2f' % line.net_amount"/></td>
+                                </tr>
+                            </t>
+                        </tbody>
+                    </table>
+
+                    <!-- Totals -->
+                    <div style="display:flex; justify-content:flex-end; margin-bottom:14px;">
+                        <table style="width:280px; border-collapse:collapse; font-size:11px;">
+                            <tr><td style="padding:4px 8px;">Subtotal:</td><td style="padding:4px 8px; text-align:right;"><span t-esc="'%.2f' % doc.subtotal"/></td></tr>
+                            <tr><td style="padding:4px 8px;">GST:</td><td style="padding:4px 8px; text-align:right;"><span t-esc="'%.2f' % doc.gst_amount"/></td></tr>
+                            <tr><td style="padding:4px 8px;">FST:</td><td style="padding:4px 8px; text-align:right;"><span t-esc="'%.2f' % doc.fst_amount"/></td></tr>
+                            <tr><td style="padding:4px 8px;">Total Tax:</td><td style="padding:4px 8px; text-align:right;"><span t-esc="'%.2f' % doc.tax_amount"/></td></tr>
+                            <tr style="border-top:2px solid #333; font-weight:700; font-size:12px;">
+                                <td style="padding:6px 8px;">Grand Total:</td>
+                                <td style="padding:6px 8px; text-align:right;"><span t-esc="'%.2f' % doc.grand_total"/></td>
+                            </tr>
+                        </table>
+                    </div>
+
+                    <!-- FBR Footer -->
+                    <div t-if="doc.fbr_id" style="border-top:1px solid #ccc; padding-top:8px; text-align:center; margin-top:8px;">
+                        <span style="font-size:9px; color:#555;">
+                            This invoice has been submitted to FBR Digital Invoicing System.
+                            FBR Invoice No: <strong><span t-field="doc.fbr_id"/></strong>
+                            | Date: <span t-field="doc.fbr_date"/>
+                        </span>
+                    </div>
+
+                </div>
+            </t>
+        </t>
+    </template>
+
+    <template id="report_digital_invoice_book">
+        <t t-call="web.html_container">
+            <t t-call="web.internal_layout">
+                <div class="page">
+                    <h2>Digital Invoice Book Report</h2>
+                    <table class="table table-striped table-sm">
+                        <thead>
+                            <tr>
+                                <th>Invoice #</th><th>Date</th><th>Customer</th>
+                                <th>Item</th><th>Qty</th><th>Amount</th>
+                                <th>Tax</th><th>Net Total</th><th>HS Code</th>
+                                <th>Status</th><th>FBR Ref</th>
+                            </tr>
+                        </thead>
+                        <tbody>
+                            <tr t-foreach="docs" t-as="doc">
+                                <td><span t-field="doc.invoice_number"/></td>
+                                <td><span t-field="doc.invoice_date"/></td>
+                                <td><span t-field="doc.customer_id.name"/></td>
+                                <td><span t-field="doc.item_name"/></td>
+                                <td><span t-esc="'%.2f' % doc.quantity"/></td>
+                                <td><span t-esc="'%.2f' % doc.amount"/></td>
+                                <td><span t-esc="'%.2f' % doc.tax_amount"/></td>
+                                <td><strong><span t-esc="'%.2f' % doc.net_total"/></strong></td>
+                                <td><span t-field="doc.hs_code"/></td>
+                                <td><span t-field="doc.status"/></td>
+                                <td>
+                                    <span t-field="doc.fbr_reference" t-if="doc.fbr_reference"/>
+                                    <t t-else="">-</t>
+                                </td>
+                            </tr>
+                        </tbody>
+                    </table>
+                </div>
+            </t>
+        </t>
+    </template>
+
+    <template id="report_sales_summary">
+        <t t-call="web.html_container">
+            <t t-call="web.internal_layout">
+                <div class="page">
+                    <h2>Sales Summary Report</h2>
+                    <table class="table table-striped table-sm">
+                        <thead>
+                            <tr>
+                                <th>Bill No</th><th>Date</th><th>Buyer</th>
+                                <th>Subtotal</th><th>GST</th><th>FST</th>
+                                <th>Total Tax</th><th>Grand Total</th><th>Status</th>
+                            </tr>
+                        </thead>
+                        <tbody>
+                            <tr t-foreach="docs" t-as="doc">
+                                <td><span t-field="doc.bill_no"/></td>
+                                <td><span t-field="doc.invoice_date"/></td>
+                                <td><span t-field="doc.buyer_id.name"/></td>
+                                <td><span t-esc="'%.2f' % doc.subtotal"/></td>
+                                <td><span t-esc="'%.2f' % doc.gst_amount"/></td>
+                                <td><span t-esc="'%.2f' % doc.fst_amount"/></td>
+                                <td><span t-esc="'%.2f' % doc.tax_amount"/></td>
+                                <td><strong><span t-esc="'%.2f' % doc.grand_total"/></strong></td>
+                                <td><span t-field="doc.state"/></td>
+                            </tr>
+                        </tbody>
+                    </table>
+                </div>
+            </t>
+        </t>
+    </template>
+
+</odoo>

@@ -1,0 +1,244 @@
+<?xml version="1.0" encoding="utf-8"?>
+<odoo>
+
+    <!-- Customer Account List View -->
+    <record id="view_customer_account_tree" model="ir.ui.view">
+        <field name="name">customer.account.list</field>
+        <field name="model">customer.account</field>
+        <field name="arch" type="xml">
+            <list string="Customers"
+                  decoration-muted="not active"
+                  decoration-success="account_type == 'registered'"
+                  decoration-info="account_type == 'unregistered'">
+                <field name="code" string="Code" optional="show"/>
+                <field name="name" string="Customer Name"/>
+                <field name="main_category_id" string="Category" optional="show"/>
+                <field name="account_type" string="Type"
+                       widget="badge"
+                       decoration-success="account_type == 'registered'"
+                       decoration-warning="account_type == 'unregistered'"/>
+                <field name="ntn" string="NTN/CNIC" optional="show"/>
+                <field name="phone" string="Phone" optional="show"/>
+                <field name="province" string="Province" optional="show"/>
+                <field name="registration_type" string="Reg. Type" optional="show"/>
+                <field name="credit_limit" string="Credit Limit" optional="hide"/>
+                <field name="credit_days" string="Credit Days" optional="hide"/>
+                <field name="t_ent" string="Invoices" optional="show"/>
+                <field name="active" invisible="1"/>
+            </list>
+        </field>
+    </record>
+
+    <!-- Customer Account Form View -->
+    <record id="view_customer_account_form" model="ir.ui.view">
+        <field name="name">customer.account.form</field>
+        <field name="model">customer.account</field>
+        <field name="arch" type="xml">
+            <form string="Customer Account">
+                <sheet>
+                    <div class="oe_button_box" name="button_box">
+                        <button name="action_view_invoices" type="object"
+                                class="oe_stat_button" invisible="t_ent == 0"
+                                icon="fa-file-text-o">
+                            <field name="t_ent" widget="statinfo" string="Invoices"/>
+                        </button>
+                    </div>
+                    <div class="o_cust_header">
+                        <div class="o_cust_avatar"/>
+                        <div class="o_cust_info_card">
+                            <h1 class="o_cust_name">
+                                <field name="name" placeholder="Customer Name" required="1"/>
+                            </h1>
+                            <div class="o_cust_meta_row">
+                                <div class="o_cust_code_pill">
+                                    <field name="code" readonly="1" nolabel="1"/>
+                                </div>
+                                <field name="account_type" widget="badge"
+                                       decoration-success="account_type == 'registered'"
+                                       decoration-warning="account_type == 'unregistered'"
+                                       readonly="1"/>
+                                <field name="registration_type" widget="badge"
+                                       decoration-info="registration_type != False"
+                                       readonly="1" invisible="not registration_type"/>
+                                <span class="o_cust_province_chip" invisible="not province">
+                                    &#128205; <field name="province" readonly="1" nolabel="1"
+                                                    class="o_cust_province_inline"/>
+                                </span>
+                                <div class="o_cust_active_wrap">
+                                    <span class="o_cust_active_lbl">Active</span>
+                                    <field name="active" widget="boolean_toggle" nolabel="1"/>
+                                </div>
+                            </div>
+                        </div>
+                    </div>
+                    <div class="o_cust_divider"/>
+                    <div class="o_cust_grid_2">
+                        <div class="o_cust_card">
+                            <div class="o_cust_card_title">Account Details</div>
+                            <group>
+                                <field name="main_category_id" required="1"/>
+                                <field name="sub_category_id" required="1"
+                                       domain="[('category_id', '=', main_category_id)]"/>
+                                <field name="account_type" required="1"/>
+                                <field name="opening_balance"/>
+                                <field name="balance_type" string="Opening Type"/>
+                            </group>
+                        </div>
+                        <div class="o_cust_card">
+                            <div class="o_cust_card_title">Credit Settings</div>
+                            <group>
+                                <field name="credit_limit"/>
+                                <field name="credit_days" string="Credit Days"/>
+                            </group>
+                        </div>
+                    </div>
+                    <div class="o_cust_divider"/>
+                    <div class="o_cust_grid_2">
+                        <div class="o_cust_card o_cust_card_blue">
+                            <div class="o_cust_card_title o_title_blue">&#128196; FBR Tax Identity</div>
+                            <group>
+                                <field name="ntn" string="NTN/CNIC"/>
+                                <field name="cnic" string="CNIC" optional="hide"/>
+                                <field name="stn" string="STN"/>
+                                <label for="registration_type" string="Registration Type"/>
+                                    <div class="o_row">
+                                        <field name="registration_type" nolabel="1"/>
+                                        <button name="action_fetch_registration_type" type="object"
+                                                string="Fetch from FBR" class="btn-secondary btn-sm"
+                                                icon="fa-cloud-download"
+                                                invisible="not ntn"
+                                                confirm="This will call FBR and may overwrite the current Registration Type. Continue?"/>
+                                    </div>
+                            </group>
+                        </div>
+                        <div class="o_cust_card o_cust_card_green">
+                            <div class="o_cust_card_title o_title_green">&#128222; Contact Information</div>
+                            <group>
+                                <field name="province"/>
+                                <field name="phone"/>
+                                <field name="email"/>
+                            </group>
+                        </div>
+                    </div>
+                    <div class="o_cust_divider"/>
+                    <div class="o_cust_card">
+                        <div class="o_cust_card_title">&#128205; Address</div>
+                        <field name="address" nolabel="1" placeholder="Full business address..."/>
+                    </div>
+                </sheet>
+            </form>
+        </field>
+    </record>
+
+    <!-- Search View -->
+    <record id="view_customer_account_search" model="ir.ui.view">
+        <field name="name">customer.account.search</field>
+        <field name="model">customer.account</field>
+        <field name="arch" type="xml">
+            <search string="Search Customers">
+                <field name="name" string="Customer Name"/>
+                <field name="code" string="Customer Code"/>
+                <field name="main_category_id" string="Category"/>
+                <field name="ntn" string="NTN/CNIC"/>
+                <field name="phone" string="Phone"/>
+                <filter name="active" string="Active" domain="[('active', '=', True)]"/>
+                <filter name="inactive" string="Archived" domain="[('active', '=', False)]"/>
+                <filter name="registered" string="Registered" domain="[('registration_type', '=', 'registered')]"/>
+                <filter name="unregistered" string="Unregistered" domain="[('registration_type', '=', 'unregistered')]"/>
+                <filter name="group_by_category" string="Category" context="{'group_by': 'main_category_id'}"/>
+                <filter name="group_by_type" string="Account Type" context="{'group_by': 'account_type'}"/>
+                <filter name="group_by_registration_type" string="Registration Type" context="{'group_by': 'registration_type'}"/>
+            </search>
+        </field>
+    </record>
+
+    <!-- Customer Category List View -->
+    <record id="view_customer_category_tree" model="ir.ui.view">
+        <field name="name">customer.category.list</field>
+        <field name="model">customer.category</field>
+        <field name="arch" type="xml">
+            <list string="Customer Categories" editable="bottom">
+                <field name="name"/>
+                <field name="active"/>
+            </list>
+        </field>
+    </record>
+
+    <!-- Customer Category Form View -->
+    <record id="view_customer_category_form" model="ir.ui.view">
+        <field name="name">customer.category.form</field>
+        <field name="model">customer.category</field>
+        <field name="arch" type="xml">
+            <form string="Customer Category">
+                <sheet>
+                    <div class="o_cust_header">
+                        <div class="o_simple_avatar o_avatar_purple">&#128101;</div>
+                        <div class="o_cust_info_card">
+                            <h1 class="o_cust_name">
+                                <field name="name" required="1" placeholder="Category Name"/>
+                            </h1>
+                            <div class="o_cust_meta_row">
+                                <div class="o_cust_active_wrap">
+                                    <span class="o_cust_active_lbl">Active</span>
+                                    <field name="active" widget="boolean_toggle" nolabel="1"/>
+                                </div>
+                            </div>
+                        </div>
+                    </div>
+                </sheet>
+            </form>
+        </field>
+    </record>
+
+    <!-- Customer Subcategory List View -->
+    <record id="view_customer_subcategory_tree" model="ir.ui.view">
+        <field name="name">customer.subcategory.list</field>
+        <field name="model">customer.subcategory</field>
+        <field name="arch" type="xml">
+            <list string="Customer Sub-Categories">
+                <field name="name"/>
+                <field name="category_id"/>
+                <field name="active"/>
+            </list>
+        </field>
+    </record>
+
+    <!-- Customer Subcategory Form View -->
+    <record id="view_customer_subcategory_form" model="ir.ui.view">
+        <field name="name">customer.subcategory.form</field>
+        <field name="model">customer.subcategory</field>
+        <field name="arch" type="xml">
+            <form string="Customer Sub-Category">
+                <sheet>
+                    <div class="o_cust_header">
+                        <div class="o_simple_avatar o_avatar_purple">&#128193;</div>
+                        <div class="o_cust_info_card">
+                            <h1 class="o_cust_name">
+                                <field name="name" required="1" placeholder="Sub-Category Name"/>
+                            </h1>
+                            <div class="o_cust_meta_row">
+                                <span class="o_cust_province_chip" invisible="not category_id">
+                                    &#128101; <field name="category_id" readonly="1" nolabel="1"
+                                                    class="o_cust_province_inline"
+                                                    options="{'no_open': True}"/>
+                                </span>
+                                <div class="o_cust_active_wrap">
+                                    <span class="o_cust_active_lbl">Active</span>
+                                    <field name="active" widget="boolean_toggle" nolabel="1"/>
+                                </div>
+                            </div>
+                        </div>
+                    </div>
+                    <div class="o_cust_divider"/>
+                    <div class="o_cust_card">
+                        <div class="o_cust_card_title">&#128193; Details</div>
+                        <group>
+                            <field name="category_id" required="1" options="{'no_open': True}"/>
+                        </group>
+                    </div>
+                </sheet>
+            </form>
+        </field>
+    </record>
+
+</odoo>

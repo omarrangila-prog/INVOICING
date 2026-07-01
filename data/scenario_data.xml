@@ -1,0 +1,286 @@
+<?xml version="1.0" encoding="utf-8"?>
+<odoo>
+    <data noupdate="1">
+
+        <record id="scenario_SN001" model="digital.scenario">
+            <field name="name">SN001</field>
+            <field name="description">Sale of Standard Rate Goods to Registered Buyers</field>
+            <field name="sales_type">Goods at standard rate (default)</field>
+            <field name="tax_rate" eval="18"/>
+            <field name="sro_schedule"></field>
+            <field name="sro_serial_no"></field>
+            <field name="active" eval="True"/>
+        </record>
+
+        <record id="scenario_SN002" model="digital.scenario">
+            <field name="name">SN002</field>
+            <field name="description">Sale of Standard Rate Goods to Unregistered Buyers</field>
+            <field name="sales_type">Goods at standard rate (default)</field>
+            <field name="tax_rate" eval="18"/>
+            <field name="sro_schedule"></field>
+            <field name="sro_serial_no"></field>
+            <field name="active" eval="True"/>
+        </record>
+
+        <record id="scenario_SN003" model="digital.scenario">
+            <field name="name">SN003</field>
+            <field name="description">Sale of Steel (Melted and Re-Rolled) (Billets, Ingots and Long Bars)</field>
+            <field name="sales_type">Steel melting and re-rolling</field>
+            <field name="tax_rate" eval="18"/>
+            <field name="sro_schedule"></field>
+            <field name="sro_serial_no"></field>
+            <field name="active" eval="True"/>
+        </record>
+
+        <record id="scenario_SN004" model="digital.scenario">
+            <field name="name">SN004</field>
+            <field name="description">Sale of Steel Scrap by Ship Breakers</field>
+            <field name="sales_type">Ship breaking</field>
+            <field name="tax_rate" eval="18"/>
+            <field name="sro_schedule"></field>
+            <field name="sro_serial_no"></field>
+            <field name="active" eval="True"/>
+        </record>
+
+        <record id="scenario_SN005" model="digital.scenario">
+            <field name="name">SN005</field>
+            <field name="description">Sales of Reduced Rate Goods (Eighth Schedule)</field>
+            <field name="sales_type">Goods at Reduced Rate</field>
+            <field name="tax_rate" eval="0"/>
+            <field name="sro_schedule">EIGHTH SCHEDULE Table 1</field>
+            <field name="sro_serial_no">81</field>
+            <field name="active" eval="True"/>
+        </record>
+
+        <record id="scenario_SN006" model="digital.scenario">
+            <field name="name">SN006</field>
+            <field name="description">Sale of Exempt Goods (Sixth Schedule)</field>
+            <field name="sales_type">Exempt goods</field>
+            <field name="tax_rate" eval="0"/>
+            <field name="sro_schedule">6th Schd Table I</field>
+            <field name="sro_serial_no">100</field>
+            <field name="active" eval="True"/>
+        </record>
+
+        <record id="scenario_SN007" model="digital.scenario">
+            <field name="name">SN007</field>
+            <field name="description">Sale Of Zero-Rated Goods (Fifth Schedule)</field>
+            <field name="sales_type">Goods at zero-rate</field>
+            <field name="tax_rate" eval="18"/>
+            <field name="sro_schedule">327(I)/2008</field>
+            <field name="sro_serial_no">1</field>
+            <field name="active" eval="True"/>
+        </record>
+
+        <record id="scenario_SN008" model="digital.scenario">
+            <field name="name">SN008</field>
+            <field name="description">Sale of 3rd Schedule Goods</field>
+            <field name="sales_type">3rd Schedule Goods</field>
+            <field name="tax_rate" eval="18"/>
+            <field name="sro_schedule"></field>
+            <field name="sro_serial_no"></field>
+            <field name="active" eval="True"/>
+        </record>
+
+        <record id="scenario_SN009" model="digital.scenario">
+            <field name="name">SN009</field>
+            <field name="description">Purchase From Registered Cotton Ginners</field>
+            <field name="sales_type">Cotton ginners</field>
+            <field name="tax_rate" eval="18"/>
+            <field name="sro_schedule"></field>
+            <field name="sro_serial_no"></field>
+            <field name="active" eval="True"/>
+        </record>
+
+        <record id="scenario_SN010" model="digital.scenario">
+            <field name="name">SN010</field>
+            <field name="description">Sale Of Telecom Services by Mobile Operators</field>
+            <field name="sales_type">Telecommunication services</field>
+            <field name="tax_rate" eval="18"/>
+            <field name="sro_schedule"></field>
+            <field name="sro_serial_no"></field>
+            <field name="active" eval="True"/>
+        </record>
+
+        <record id="scenario_SN011" model="digital.scenario">
+            <field name="name">SN011</field>
+            <field name="description">Sale of Steel through Toll Manufacturing (Billets, Ingots and Long Bars)</field>
+            <field name="sales_type">Toll Manufacturing</field>
+            <field name="tax_rate" eval="18"/>
+            <field name="sro_schedule"></field>
+            <field name="sro_serial_no"></field>
+            <field name="active" eval="True"/>
+        </record>
+
+        <record id="scenario_SN012" model="digital.scenario">
+            <field name="name">SN012</field>
+            <field name="description">Sale Of Petroleum Products</field>
+            <field name="sales_type">Petroleum Products</field>
+            <field name="tax_rate" eval="18"/>
+            <field name="sro_schedule">1450(I)/2021</field>
+            <field name="sro_serial_no">4</field>
+            <field name="active" eval="True"/>
+        </record>
+
+        <record id="scenario_SN013" model="digital.scenario">
+            <field name="name">SN013</field>
+            <field name="description">Sale Of Electricity to Retailers</field>
+            <field name="sales_type">Electricity Supply to Retailers</field>
+            <field name="tax_rate" eval="18"/>
+            <field name="sro_schedule">1450(I)/2021</field>
+            <field name="sro_serial_no">4</field>
+            <field name="active" eval="True"/>
+        </record>
+
+        <record id="scenario_SN014" model="digital.scenario">
+            <field name="name">SN014</field>
+            <field name="description">Sale of Gas to CNG Stations</field>
+            <field name="sales_type">Gas to CNG stations</field>
+            <field name="tax_rate" eval="18"/>
+            <field name="sro_schedule"></field>
+            <field name="sro_serial_no"></field>
+            <field name="active" eval="True"/>
+        </record>
+
+        <record id="scenario_SN015" model="digital.scenario">
+            <field name="name">SN015</field>
+            <field name="description">Sale of Mobile Phones</field>
+            <field name="sales_type">Mobile Phones</field>
+            <field name="tax_rate" eval="18"/>
+            <field name="sro_schedule">NINTH SCHEDULE</field>
+            <field name="sro_serial_no">1(A)</field>
+            <field name="active" eval="True"/>
+        </record>
+
+        <record id="scenario_SN016" model="digital.scenario">
+            <field name="name">SN016</field>
+            <field name="description">Processing / Conversion of Goods</field>
+            <field name="sales_type">Processing/Conversion of Goods</field>
+            <field name="tax_rate" eval="18"/>
+            <field name="sro_schedule"></field>
+            <field name="sro_serial_no"></field>
+            <field name="active" eval="True"/>
+        </record>
+
+        <record id="scenario_SN017" model="digital.scenario">
+            <field name="name">SN017</field>
+            <field name="description">Sale of Goods Where FED Is Charged in ST Mode</field>
+            <field name="sales_type">Goods (FED in ST Mode)</field>
+            <field name="tax_rate" eval="18"/>
+            <field name="sro_schedule"></field>
+            <field name="sro_serial_no"></field>
+            <field name="active" eval="True"/>
+        </record>
+
+        <record id="scenario_SN018" model="digital.scenario">
+            <field name="name">SN018</field>
+            <field name="description">Sale Of Services Where FED Is Charged in ST Mode</field>
+            <field name="sales_type">Services (FED in ST Mode)</field>
+            <field name="tax_rate" eval="18"/>
+            <field name="sro_schedule"></field>
+            <field name="sro_serial_no"></field>
+            <field name="active" eval="True"/>
+        </record>
+
+        <record id="scenario_SN019" model="digital.scenario">
+            <field name="name">SN019</field>
+            <field name="description">Sale of Services (as per ICT Ordinance)</field>
+            <field name="sales_type">Services</field>
+            <field name="tax_rate" eval="18"/>
+            <field name="sro_schedule">ICTO TABLE I</field>
+            <field name="sro_serial_no">1(ii)(ii)(a)</field>
+            <field name="active" eval="True"/>
+        </record>
+
+        <record id="scenario_SN020" model="digital.scenario">
+            <field name="name">SN020</field>
+            <field name="description">Sale of Electric Vehicles</field>
+            <field name="sales_type">Electric Vehicle</field>
+            <field name="tax_rate" eval="18"/>
+            <field name="sro_schedule">6th Schd Table III</field>
+            <field name="sro_serial_no">20</field>
+            <field name="active" eval="True"/>
+        </record>
+
+        <record id="scenario_SN021" model="digital.scenario">
+            <field name="name">SN021</field>
+            <field name="description">Sale of Cement /Concrete Block</field>
+            <field name="sales_type">Cement /Concrete Block</field>
+            <field name="tax_rate" eval="18"/>
+            <field name="sro_schedule"></field>
+            <field name="sro_serial_no"></field>
+            <field name="active" eval="True"/>
+        </record>
+
+        <record id="scenario_SN022" model="digital.scenario">
+            <field name="name">SN022</field>
+            <field name="description">Sale of Potassium Chlorate</field>
+            <field name="sales_type">Potassium Chlorate</field>
+            <field name="tax_rate" eval="18"/>
+            <field name="sro_schedule">EIGHTH SCHEDULE Table 1</field>
+            <field name="sro_serial_no">56</field>
+            <field name="active" eval="True"/>
+        </record>
+
+        <record id="scenario_SN023" model="digital.scenario">
+            <field name="name">SN023</field>
+            <field name="description">Sale of CNG</field>
+            <field name="sales_type">CNG Sales</field>
+            <field name="tax_rate" eval="18"/>
+            <field name="sro_schedule">581(1)/2024</field>
+            <field name="sro_serial_no">Region-I</field>
+            <field name="active" eval="True"/>
+        </record>
+
+        <record id="scenario_SN024" model="digital.scenario">
+            <field name="name">SN024</field>
+            <field name="description">Sale Of Goods Listed in SRO 297(1)/2023</field>
+            <field name="sales_type">Goods as per SRO.297(|)/2023</field>
+            <field name="tax_rate" eval="18"/>
+            <field name="sro_schedule">297(I)/2023-Table-I</field>
+            <field name="sro_serial_no">12</field>
+            <field name="active" eval="True"/>
+        </record>
+
+        <record id="scenario_SN025" model="digital.scenario">
+            <field name="name">SN025</field>
+            <field name="description">Drugs Sold at Fixed ST Rate Under Serial 81 Of Eighth Schedule Table 1</field>
+            <field name="sales_type">Non-Adjustable Supplies</field>
+            <field name="tax_rate" eval="0"/>
+            <field name="sro_schedule">EIGHTH SCHEDULE Table 1</field>
+            <field name="sro_serial_no">81</field>
+            <field name="active" eval="True"/>
+        </record>
+
+        <record id="scenario_SN026" model="digital.scenario">
+            <field name="name">SN026</field>
+            <field name="description">Sale Of Goods at Standard Rate to End Consumers by Retailers</field>
+            <field name="sales_type">Goods at standard rate (default)</field>
+            <field name="tax_rate" eval="18"/>
+            <field name="sro_schedule"></field>
+            <field name="sro_serial_no"></field>
+            <field name="active" eval="True"/>
+        </record>
+
+        <record id="scenario_SN027" model="digital.scenario">
+            <field name="name">SN027</field>
+            <field name="description">Sale Of 3rd Schedule Goods to End Consumers by Retailers</field>
+            <field name="sales_type">3rd Schedule Goods</field>
+            <field name="tax_rate" eval="18"/>
+            <field name="sro_schedule"></field>
+            <field name="sro_serial_no"></field>
+            <field name="active" eval="True"/>
+        </record>
+
+        <record id="scenario_SN028" model="digital.scenario">
+            <field name="name">SN028</field>
+            <field name="description">Sale of Goods at Reduced Rate to End Consumers by Retailers</field>
+            <field name="sales_type">Goods at Reduced Rate</field>
+            <field name="tax_rate" eval="1"/>
+            <field name="sro_schedule">EIGHTH SCHEDULE Table 1</field>
+            <field name="sro_serial_no">70</field>
+            <field name="active" eval="True"/>
+        </record>
+
+    </data>
+</odoo>

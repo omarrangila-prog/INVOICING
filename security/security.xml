@@ -1,0 +1,127 @@
+<?xml version="1.0" encoding="utf-8"?>
+<odoo>
+    <data noupdate="0">
+
+        <!-- ================================================================
+             Module Privilege (shows groups on user form in Odoo 19)
+        ================================================================ -->
+        <record id="module_invoicing_privilege" model="res.groups.privilege">
+            <field name="name">Digital Invoicing</field>
+            <field name="category_id" eval="2"/>
+        </record>
+
+        <!-- ================================================================
+             Invoicing Module Groups
+        ================================================================ -->
+        <record id="group_invoicing_user" model="res.groups">
+            <field name="name">User</field>
+            <field name="privilege_id" ref="module_invoicing_privilege"/>
+        </record>
+
+        <record id="group_invoicing_manager" model="res.groups">
+            <field name="name">Manager</field>
+            <field name="privilege_id" ref="module_invoicing_privilege"/>
+            <field name="implied_ids" eval="[(4, ref('group_invoicing_user'))]"/>
+        </record>
+
+        <record id="group_invoicing_admin" model="res.groups">
+            <field name="name">Administrator</field>
+            <field name="privilege_id" ref="module_invoicing_privilege"/>
+            <field name="implied_ids" eval="[(4, ref('group_invoicing_manager'))]"/>
+        </record>
+
+        <!-- FBR Integration Group -->
+        <record id="group_invoicing_fbr" model="res.groups">
+            <field name="name">FBR Integration</field>
+            <field name="privilege_id" ref="module_invoicing_privilege"/>
+        </record>
+
+        <!-- ================================================================
+             Record Rules - User Access
+        ================================================================ -->
+
+        <!-- Customer Account - User Rule -->
+        <record id="rule_customer_account_user" model="ir.rule">
+            <field name="name">Customer Account - User Rule</field>
+            <field name="model_id" ref="model_customer_account"/>
+            <field name="groups" eval="[(4, ref('group_invoicing_user'))]"/>
+            <field name="perm_read" eval="True"/>
+            <field name="perm_write" eval="True"/>
+            <field name="perm_create" eval="True"/>
+            <field name="perm_unlink" eval="False"/>
+            <field name="domain_force">[]</field>
+        </record>
+
+        <!-- Digital Invoice - User Rule -->
+        <record id="rule_digital_invoice_user" model="ir.rule">
+            <field name="name">Digital Invoice - User Rule</field>
+            <field name="model_id" ref="model_digital_invoice"/>
+            <field name="groups" eval="[(4, ref('group_invoicing_user'))]"/>
+            <field name="perm_read" eval="True"/>
+            <field name="perm_write" eval="True"/>
+            <field name="perm_create" eval="True"/>
+            <field name="perm_unlink" eval="False"/>
+            <field name="domain_force">[]</field>
+        </record>
+
+        <!-- Digital Invoice Book - User Rule -->
+        <record id="rule_digital_invoice_book_user" model="ir.rule">
+            <field name="name">Digital Invoice Book - User Rule</field>
+            <field name="model_id" ref="model_digital_invoice_book"/>
+            <field name="groups" eval="[(4, ref('group_invoicing_user'))]"/>
+            <field name="perm_read" eval="True"/>
+            <field name="perm_write" eval="False"/>
+            <field name="perm_create" eval="False"/>
+            <field name="perm_unlink" eval="False"/>
+            <field name="domain_force">[]</field>
+        </record>
+
+        <!-- ================================================================
+             Multi-Company Record Rules
+             Apply to regular users only (base.group_user)
+             Admin/superuser bypasses these rules automatically
+        ================================================================ -->
+
+        <!-- Digital Invoice - Company Rule -->
+        <record id="rule_digital_invoice_company" model="ir.rule">
+            <field name="name">Digital Invoice: Company</field>
+            <field name="model_id" ref="model_digital_invoice"/>
+            <field name="groups" eval="[(4, ref('base.group_user'))]"/>
+            <field name="perm_read" eval="True"/>
+            <field name="perm_write" eval="True"/>
+            <field name="perm_create" eval="True"/>
+            <field name="perm_unlink" eval="True"/>
+            <field name="domain_force">['|', ('company_id', '=', False), ('company_id', 'in', company_ids)]</field>
+        </record>
+
+        <!-- Customer Account - Company Rule -->
+        <record id="rule_customer_account_company" model="ir.rule">
+            <field name="name">Customer Account: Company</field>
+            <field name="model_id" ref="model_customer_account"/>
+            <field name="groups" eval="[(4, ref('base.group_user'))]"/>
+            <field name="perm_read" eval="True"/>
+            <field name="perm_write" eval="True"/>
+            <field name="perm_create" eval="True"/>
+            <field name="perm_unlink" eval="True"/>
+            <field name="domain_force">['|', ('company_id', '=', False), ('company_id', 'in', company_ids)]</field>
+        </record>
+
+        <!-- Item Master - Company Rule -->
+        <record id="rule_item_master_company" model="ir.rule">
+            <field name="name">Item Master: Company</field>
+            <field name="model_id" ref="model_item_master"/>
+            <field name="groups" eval="[(4, ref('base.group_user'))]"/>
+            <field name="perm_read" eval="True"/>
+            <field name="perm_write" eval="True"/>
+            <field name="perm_create" eval="True"/>
+            <field name="perm_unlink" eval="True"/>
+            <field name="domain_force">['|', ('company_id', '=', False), ('company_id', 'in', company_ids)]</field>
+        </record>
+
+
+       <!-- ERP Manager gets admin access automatically -->
+        <record id="base.group_erp_manager" model="res.groups">
+            <field name="implied_ids" eval="[(4, ref('group_invoicing_admin'))]"/>
+        </record>
+    </data>
+</odoo>

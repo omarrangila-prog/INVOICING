@@ -1,0 +1,117 @@
+<?xml version="1.0" encoding="utf-8"?>
+<odoo>
+
+    <!-- Main Root Menu -->
+    <menuitem
+        id="invoicing_menu_root"
+        name="Keleven Digital Invoicing"
+        action="invoicing.action_digital_invoice_dashboard"
+        web_icon="invoicing,static/description/icon.png"
+        sequence="1"/>
+        
+
+    <!-- Customer Accounts -->
+    <menuitem
+        id="invoicing_menu_customer_main"
+        name="Customers"
+        parent="invoicing_menu_root"
+        sequence="1"/>
+
+    <menuitem
+        id="invoicing_menu_customer_account"
+        name="Customers List"
+        parent="invoicing_menu_customer_main"
+        action="invoicing.action_customer_account_window"
+        sequence="1"/>
+
+    <!-- Item Accounts -->
+    <menuitem
+        id="invoicing_menu_item_main"
+        name="Items"
+        parent="invoicing_menu_root"
+        sequence="2"/>
+
+    <menuitem
+        id="invoicing_menu_item_account"
+        name="Items List"
+        parent="invoicing_menu_item_main"
+        action="invoicing.action_item_master_window"
+        sequence="1"/>
+
+    <!-- Digital Invoicing -->
+    <menuitem
+        id="invoicing_menu_digital_main"
+        name="Invoicing"
+        parent="invoicing_menu_root"
+        sequence="3"/>
+
+    <menuitem
+        id="invoicing_menu_digital_invoice"
+        name="Invoices List"
+        parent="invoicing_menu_digital_main"
+        action="invoicing.action_digital_invoice_window"
+        sequence="1"/>
+
+    <!-- Configuration -->
+    <menuitem
+        id="invoicing_menu_config"
+        name="Configuration"
+        parent="invoicing_menu_root"
+        sequence="4"/>
+
+    <menuitem
+        id="invoicing_menu_config_customer_category"
+        name="Customer's Categories"
+        parent="invoicing_menu_config"
+        action="invoicing.action_customer_category_window"
+        sequence="1"/>
+
+    <menuitem
+        id="invoicing_menu_config_customer_subcategory"
+        name="Customer's Sub-Categories"
+        parent="invoicing_menu_config"
+        action="invoicing.action_customer_subcategory_window"
+        sequence="2"/>
+
+    <menuitem
+        id="invoicing_menu_config_item_category"
+        name="Item's Categories"
+        parent="invoicing_menu_config"
+        action="invoicing.action_item_category_window"
+        sequence="3"/>
+
+    <menuitem
+        id="invoicing_menu_config_item_subcategory"
+        name="Item's Sub-Categories"
+        parent="invoicing_menu_config"
+        action="invoicing.action_item_subcategory_window"
+        sequence="4"/>
+
+    <menuitem
+        id="invoicing_menu_config_uom"
+        name="Units of Measure"
+        parent="invoicing_menu_config"
+        action="invoicing.action_item_uom_window"
+        sequence="5"/>
+
+    <menuitem
+        id="invoicing_menu_config_hs_code"
+        name="HS Codes"
+        parent="invoicing_menu_config"
+        action="invoicing.action_item_hs_code_window"
+        sequence="6"/>
+
+    <menuitem
+        id="invoicing_menu_config_tax_scenario"
+        name="Tax Scenarios"
+        parent="invoicing_menu_config"
+        action="invoicing.action_digital_scenario_window"
+        sequence="7"/>
+    
+    <menuitem
+    id="invoicing_menu_fbr_logs"
+    name="FBR Logs"
+    parent="invoicing_menu_config"
+    action="invoicing.action_fbr_log_window"
+    sequence="8"/>
+</odoo>

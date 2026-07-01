@@ -1,0 +1,771 @@
+/* ================================================
+   DIGITAL INVOICING — CORPORATE THEME (ODOO 19)
+   Purple: #7c3aed | Blue: #2563eb | Green: #16a34a
+   ================================================ */
+
+/* ===== CUSTOMER / ITEM / FBR LOG: HEADER ===== */
+
+.o_form_view .o_cust_header {
+    display: flex !important;
+    align-items: center !important;
+    gap: 20px !important;
+    margin-bottom: 16px !important;
+}
+
+.o_form_view .o_cust_avatar {
+    width: 80px !important;
+    min-width: 80px !important;
+    height: 80px !important;
+    border-radius: 50% !important;
+    background: linear-gradient(135deg, #7c3aed, #a855f7) !important;
+    display: flex !important;
+    align-items: center !important;
+    justify-content: center !important;
+    flex-shrink: 0 !important;
+    box-shadow: 0 4px 14px rgba(124,58,237,0.35) !important;
+}
+
+.o_form_view .o_cust_avatar::after {
+    content: attr(data-letter) !important;
+    font-size: 30px !important;
+    font-weight: 900 !important;
+    color: white !important;
+}
+
+.o_form_view .o_item_avatar {
+    width: 80px !important;
+    min-width: 80px !important;
+    height: 80px !important;
+    border-radius: 16px !important;
+    background: linear-gradient(135deg, #0ea5e9, #0284c7) !important;
+    display: flex !important;
+    align-items: center !important;
+    justify-content: center !important;
+    overflow: hidden !important;
+    flex-shrink: 0 !important;
+    box-shadow: 0 4px 14px rgba(14,165,233,0.35) !important;
+}
+
+.o_form_view .o_item_avatar::after { content: "📦" !important; font-size: 30px !important; }
+.o_form_view .o_item_avatar:has(img)::after { content: none !important; }
+.o_form_view .o_item_avatar .o_field_image img { width: 80px !important; height: 80px !important; object-fit: cover !important; }
+
+.o_form_view .o_fbr_log_avatar_success {
+    width: 80px !important; min-width: 80px !important; height: 80px !important;
+    border-radius: 50% !important;
+    background: linear-gradient(135deg, #16a34a, #4ade80) !important;
+    display: flex !important; align-items: center !important;
+    justify-content: center !important; flex-shrink: 0 !important;
+    font-size: 32px !important; font-weight: 900 !important; color: white !important;
+    box-shadow: 0 4px 14px rgba(22,163,74,0.35) !important;
+}
+
+.o_form_view .o_fbr_log_avatar_failed {
+    width: 80px !important; min-width: 80px !important; height: 80px !important;
+    border-radius: 50% !important;
+    background: linear-gradient(135deg, #dc2626, #f87171) !important;
+    display: flex !important; align-items: center !important;
+    justify-content: center !important; flex-shrink: 0 !important;
+    font-size: 32px !important; font-weight: 900 !important; color: white !important;
+    box-shadow: 0 4px 14px rgba(220,38,38,0.35) !important;
+}
+
+.o_form_view .o_cust_info_card {
+    flex: 1 !important;
+    background: linear-gradient(135deg, #f8f7ff, #f0ebff) !important;
+    border: 1.5px solid #d8b4fe !important;
+    border-radius: 14px !important;
+    padding: 16px 22px !important;
+    display: flex !important;
+    flex-direction: column !important;
+    gap: 10px !important;
+    box-shadow: 0 2px 8px rgba(124,58,237,0.08) !important;
+}
+
+.o_form_view .o_cust_name {
+    margin: 0 !important;
+    font-size: 26px !important;
+    font-weight: 800 !important;
+    color: #1a1f36 !important;
+    line-height: 1.2 !important;
+    width: 100% !important;
+    display: block !important;
+}
+
+.o_form_view .o_cust_name .o_field_widget {
+    width: 100% !important;
+    display: block !important;
+}
+
+.o_form_view .o_cust_name .o_field_widget input {
+    font-size: 26px !important;
+    font-weight: 800 !important;
+    color: #1a1f36 !important;
+    background: transparent !important;
+    border: none !important;
+    border-bottom: 1.5px dashed #d8b4fe !important;
+    border-radius: 0 !important;
+    box-shadow: none !important;
+    padding: 2px 0 4px !important;
+    width: 100% !important;
+    display: block !important;
+    box-sizing: border-box !important;
+}
+
+.o_form_view .o_cust_name .o_field_widget input:focus {
+    border-bottom-color: #7c3aed !important;
+    outline: none !important;
+    box-shadow: none !important;
+}
+
+.o_form_view .o_cust_name .o_field_widget span {
+    font-size: 26px !important;
+    font-weight: 800 !important;
+    color: #1a1f36 !important;
+    display: block !important;
+    width: 100% !important;
+}
+
+.o_form_view .o_cust_meta_row {
+    display: flex !important;
+    align-items: center !important;
+    gap: 8px !important;
+    flex-wrap: wrap !important;
+}
+
+.o_form_view .o_cust_code_pill {
+    background: #ede9fe !important;
+    border: 1px solid #c4b5fd !important;
+    border-radius: 20px !important;
+    padding: 4px 14px !important;
+    font-size: 11px !important;
+    font-weight: 700 !important;
+    color: #7c3aed !important;
+    white-space: nowrap !important;
+}
+
+.o_form_view .o_cust_code_pill .o_field_widget,
+.o_form_view .o_cust_code_pill .o_field_widget span {
+    font-size: 11px !important; font-weight: 700 !important;
+    color: #7c3aed !important; display: inline !important;
+}
+
+.o_form_view .o_cust_province_chip {
+    font-size: 12px !important; color: #6b7280 !important;
+    background: rgba(255,255,255,0.7) !important;
+    border: 1px solid #e5e7eb !important;
+    border-radius: 20px !important; padding: 4px 12px !important;
+}
+
+.o_form_view .o_cust_province_inline,
+.o_form_view .o_cust_province_chip .o_field_widget {
+    font-size: 12px !important; color: #6b7280 !important; display: inline !important;
+}
+
+.o_form_view .o_item_chip {
+    font-size: 12px !important; color: #6b7280 !important;
+    background: rgba(255,255,255,0.7) !important;
+    border: 1px solid #e5e7eb !important;
+    border-radius: 20px !important; padding: 4px 12px !important; white-space: nowrap !important;
+}
+
+.o_form_view .o_chip_blue { background: #dbeafe !important; border-color: #bfdbfe !important; color: #2563eb !important; }
+
+.o_form_view .o_item_chip .o_field_widget,
+.o_form_view .o_item_chip .o_field_widget span {
+    font-size: 12px !important; color: inherit !important; display: inline !important;
+}
+
+.o_form_view .o_cust_active_wrap {
+    display: flex !important; align-items: center !important; gap: 8px !important;
+    margin-left: auto !important; background: white !important;
+    border: 1.5px solid #e5e7eb !important; border-radius: 20px !important;
+    padding: 5px 14px !important; box-shadow: 0 1px 3px rgba(0,0,0,0.06) !important;
+}
+
+.o_form_view .o_cust_active_lbl {
+    font-size: 11px !important; font-weight: 700 !important; color: #6b7280 !important;
+    text-transform: uppercase !important; letter-spacing: 0.8px !important;
+}
+
+/* ===== SHARED LAYOUT ===== */
+
+.o_form_view .o_cust_divider {
+    border: none !important; border-top: 1.5px solid #f0f0f0 !important; margin: 18px 0 !important;
+}
+
+.o_form_view .o_cust_grid_2 {
+    display: grid !important; grid-template-columns: 1fr 1fr !important; gap: 16px !important;
+}
+
+/* ===== CARDS ===== */
+
+.o_form_view .o_cust_card {
+    background: #ffffff !important; border: 1.5px solid #e8eaed !important;
+    border-radius: 12px !important; padding: 18px 22px !important;
+    box-shadow: 0 1px 4px rgba(0,0,0,0.04) !important;
+}
+
+.o_form_view .o_cust_card_blue  { background: #eff6ff !important; border-color: #bfdbfe !important; }
+.o_form_view .o_cust_card_green { background: #f0fdf4 !important; border-color: #bbf7d0 !important; }
+.o_form_view .o_fbr_error_card  { background: #fff1f2 !important; border-color: #fecdd3 !important; }
+.o_form_view .o_fbr_payload_card { background: #f0f4ff !important; border-color: #c7d2fe !important; }
+.o_form_view .o_fbr_response_success { background: #f0fdf4 !important; border-color: #bbf7d0 !important; }
+.o_form_view .o_fbr_response_failed  { background: #fff1f2 !important; border-color: #fecdd3 !important; }
+
+.o_form_view .o_cust_card_title {
+    font-size: 11px !important; font-weight: 700 !important; color: #9ca3af !important;
+    text-transform: uppercase !important; letter-spacing: 1.2px !important;
+    margin-bottom: 14px !important; display: block !important;
+}
+
+.o_form_view .o_title_blue  { color: #2563eb !important; }
+.o_form_view .o_title_green { color: #16a34a !important; }
+.o_form_view .o_title_red   { color: #dc2626 !important; }
+
+.o_form_view .o_cust_card .o_field_widget input,
+.o_form_view .o_cust_card .o_field_widget textarea,
+.o_form_view .o_cust_card .o_field_widget .o_input {
+    background: #ffffff !important; border: 1.5px solid #e5e7eb !important;
+    border-radius: 8px !important; padding: 8px 12px !important;
+    font-size: 13px !important; color: #111827 !important;
+    box-shadow: 0 1px 3px rgba(0,0,0,0.04) !important;
+}
+
+.o_form_view .o_cust_card .o_field_widget input:focus,
+.o_form_view .o_cust_card .o_field_widget textarea:focus {
+    border-color: #7c3aed !important;
+    box-shadow: 0 0 0 3px rgba(124,58,237,0.12) !important; outline: none !important;
+}
+
+/* Stat buttons */
+.o_form_view .oe_button_box .oe_stat_button {
+    border: 1.5px solid #e0d7ff !important; border-radius: 10px !important;
+    background: #f8f7ff !important; color: #7c3aed !important; transition: all 0.15s !important;
+}
+.o_form_view .oe_button_box .oe_stat_button:hover {
+    background: #ede9fe !important; border-color: #c4b5fd !important;
+    transform: translateY(-1px) !important; box-shadow: 0 2px 8px rgba(124,58,237,0.15) !important;
+}
+.o_form_view .oe_button_box .oe_stat_button .o_stat_value { color: #7c3aed !important; font-weight: 800 !important; font-size: 16px !important; }
+.o_form_view .oe_button_box .oe_stat_button .o_stat_text { color: #6b7280 !important; font-size: 11px !important; font-weight: 600 !important; }
+
+/* ===== SIMPLE FORM VIEWS (category, subcategory, UOM, HS code, scenario) ===== */
+
+.o_form_view .o_simple_form_header {
+    background: linear-gradient(135deg, #f8f7ff, #f0ebff) !important;
+    border: 1.5px solid #d8b4fe !important;
+    border-radius: 12px !important;
+    padding: 20px 24px !important;
+    margin-bottom: 20px !important;
+    box-shadow: 0 2px 8px rgba(124,58,237,0.08) !important;
+}
+
+/* Style the oe_title h1 in simple forms */
+.o_form_view .oe_title h1 .o_field_widget input,
+.o_form_view .oe_title h1 .o_field_widget span {
+    font-size: 24px !important;
+    font-weight: 800 !important;
+    color: #1a1f36 !important;
+}
+
+/* Style group labels in simple forms */
+.o_form_view .o_group .o_wrap_label label,
+.o_form_view .o_group td.o_td_label label {
+    font-size: 12px !important;
+    font-weight: 600 !important;
+    color: #6b7280 !important;
+}
+
+/* Style group inputs in simple forms */
+.o_form_view .o_group .o_field_widget input,
+.o_form_view .o_group .o_field_widget .o_input,
+.o_form_view .o_group .o_field_widget textarea {
+    background: #ffffff !important;
+    border: 1.5px solid #e5e7eb !important;
+    border-radius: 8px !important;
+    padding: 7px 12px !important;
+    font-size: 13px !important;
+    color: #111827 !important;
+    box-shadow: 0 1px 3px rgba(0,0,0,0.04) !important;
+}
+
+.o_form_view .o_group .o_field_widget input:focus,
+.o_form_view .o_group .o_field_widget textarea:focus {
+    border-color: #7c3aed !important;
+    box-shadow: 0 0 0 3px rgba(124,58,237,0.12) !important;
+    outline: none !important;
+}
+
+/* Style group outer box */
+.o_form_view .o_group {
+    border: 1.5px solid #e8eaed !important;
+    border-radius: 10px !important;
+    padding: 14px 18px !important;
+    background: #ffffff !important;
+    box-shadow: 0 1px 4px rgba(0,0,0,0.03) !important;
+    margin-bottom: 14px !important;
+}
+
+/* Group string title */
+.o_form_view .o_group > .o_group_label,
+.o_form_view .o_horizontal_separator {
+    font-size: 11px !important;
+    font-weight: 700 !important;
+    color: #9ca3af !important;
+    text-transform: uppercase !important;
+    letter-spacing: 1px !important;
+    margin-bottom: 10px !important;
+}
+
+/* Separator string */
+.o_form_view .o_horizontal_separator {
+    border-top: 1.5px solid #f0f0f0 !important;
+    padding-top: 14px !important;
+    margin: 14px 0 !important;
+}
+
+/* List views inside simple forms (subcategory_ids) */
+.o_form_view .o_field_one2many .o_list_view thead th {
+    background: linear-gradient(135deg, #f8f7ff, #f0ebff) !important;
+    color: #7c3aed !important;
+    font-size: 11px !important;
+    font-weight: 700 !important;
+    text-transform: uppercase !important;
+    letter-spacing: 0.8px !important;
+    border-bottom: 1.5px solid #d8b4fe !important;
+    padding: 10px 12px !important;
+}
+
+/* ===== INVOICE CORPORATE HEADER ===== */
+
+.o_form_view .o_inv_corp_header {
+    display: flex !important; align-items: flex-start !important;
+    gap: 20px !important; margin-bottom: 4px !important;
+}
+
+.o_form_view .o_inv_corp_left {
+    flex: 1 !important; display: flex !important; flex-direction: column !important; gap: 6px !important;
+}
+
+.o_form_view .o_inv_corp_badge {
+    display: inline-block !important;
+    background: linear-gradient(135deg, #7c3aed, #a855f7) !important;
+    color: white !important; font-size: 10px !important; font-weight: 800 !important;
+    letter-spacing: 2px !important; text-transform: uppercase !important;
+    padding: 4px 14px !important; border-radius: 6px !important; width: fit-content !important;
+}
+
+.o_form_view .o_inv_corp_number { font-size: 32px !important; font-weight: 900 !important; color: #1a1f36 !important; line-height: 1.1 !important; }
+.o_form_view .o_inv_corp_number .o_field_widget span,
+.o_form_view .o_inv_corp_number .o_field_widget input {
+    font-size: 32px !important; font-weight: 900 !important; color: #1a1f36 !important;
+    background: transparent !important; border: none !important; box-shadow: none !important; padding: 0 !important;
+}
+
+/* ===== INVOICE FBR CARD ===== */
+
+.o_form_view .o_inv_fbr_card { flex: 1 !important; }
+.o_form_view .o_inv_fbr_inner {
+    display: inline-flex !important; align-items: center !important; gap: 14px !important;
+    background: #fafafa !important; border: 1.5px solid #e0e0e0 !important;
+    border-radius: 12px !important; padding: 12px 16px !important;
+    box-shadow: 0 2px 8px rgba(0,0,0,0.06) !important;
+}
+.o_form_view .o_inv_fbr_label { font-size: 10px !important; color: #9ca3af !important; font-weight: 700 !important; text-transform: uppercase !important; letter-spacing: 0.8px !important; margin-bottom: 3px !important; }
+.o_form_view .o_inv_fbr_ref { font-size: 13px !important; font-weight: 700 !important; color: #1a1f36 !important; word-break: break-all !important; margin-bottom: 3px !important; }
+.o_form_view .o_inv_fbr_meta { font-size: 11px !important; color: #6b7280 !important; line-height: 1.4 !important; margin-top: 2px !important; }
+.o_form_view .o_inv_fbr_meta .o_field_widget,
+.o_form_view .o_inv_fbr_meta .o_field_widget span { font-size: 11px !important; color: #6b7280 !important; display: inline !important; }
+.o_form_view .o_inv_fbr_qr { flex-shrink: 0 !important; }
+
+/* ===== INVOICE DETAIL ROWS ===== */
+
+.o_form_view .o_inv_detail_row { display: flex !important; gap: 16px !important; margin-bottom: 14px !important; align-items: flex-start !important; }
+.o_form_view .o_inv_detail_row:last-child { margin-bottom: 0 !important; }
+.o_form_view .o_inv_detail_30  { flex: 0 0 28% !important; }
+.o_form_view .o_inv_detail_70  { flex: 0 0 70% !important; }
+.o_form_view .o_inv_detail_50  { flex: 1 !important; }
+.o_form_view .o_inv_detail_full { flex: 1 !important; }
+
+.o_form_view .o_inv_field_label { font-size: 11px !important; font-weight: 600 !important; color: #9ca3af !important; margin-bottom: 5px !important; text-transform: uppercase !important; letter-spacing: 0.6px !important; }
+
+.o_form_view .o_inv_detail_30 .o_field_widget,
+.o_form_view .o_inv_detail_70 .o_field_widget,
+.o_form_view .o_inv_detail_50 .o_field_widget,
+.o_form_view .o_inv_detail_full .o_field_widget { width: 100% !important; }
+
+.o_form_view .o_inv_detail_30 .o_field_widget input,
+.o_form_view .o_inv_detail_70 .o_field_widget input,
+.o_form_view .o_inv_detail_50 .o_field_widget input,
+.o_form_view .o_inv_detail_full .o_field_widget input,
+.o_form_view .o_inv_detail_30 .o_field_widget .o_input,
+.o_form_view .o_inv_detail_70 .o_field_widget .o_input,
+.o_form_view .o_inv_detail_50 .o_field_widget .o_input,
+.o_form_view .o_inv_detail_full .o_field_widget .o_input {
+    background: white !important; border: 1.5px solid #e5e7eb !important;
+    border-radius: 8px !important; padding: 9px 12px !important;
+    font-size: 13px !important; color: #111827 !important;
+    box-shadow: 0 1px 3px rgba(0,0,0,0.04) !important; width: 100% !important;
+}
+
+.o_form_view .o_inv_detail_30 .o_field_widget input:focus,
+.o_form_view .o_inv_detail_70 .o_field_widget input:focus,
+.o_form_view .o_inv_detail_50 .o_field_widget input:focus,
+.o_form_view .o_inv_detail_full .o_field_widget input:focus {
+    border-color: #7c3aed !important; box-shadow: 0 0 0 3px rgba(124,58,237,0.12) !important; outline: none !important;
+}
+
+/* ===== INVOICE LINES HEADER ===== */
+
+.o_form_view .o_inv_lines_header {
+    background: linear-gradient(135deg, #f8f7ff, #f0ebff) !important;
+    border: 1.5px solid #d8b4fe !important; border-radius: 10px 10px 0 0 !important;
+    padding: 12px 18px !important; border-bottom: none !important;
+}
+
+/* ===== INVOICE TOTALS ===== */
+
+.o_form_view .o_inv_totals_row { display: flex !important; justify-content: flex-end !important; margin-top: 4px !important; }
+.o_form_view .o_inv_totals_spacer { flex: 1 !important; }
+.o_form_view .o_inv_totals_card {
+    background: white !important; border: 1.5px solid #e8eaed !important;
+    border-radius: 12px !important; padding: 18px 26px !important;
+    min-width: 340px !important; box-shadow: 0 2px 8px rgba(0,0,0,0.05) !important;
+}
+.o_form_view .o_inv_total_line { display: flex !important; justify-content: space-between !important; align-items: center !important; padding: 6px 0 !important; font-size: 13px !important; }
+.o_form_view .o_inv_total_label { color: #6b7280 !important; font-weight: 500 !important; }
+.o_form_view .o_inv_total_val { font-weight: 600 !important; color: #1a1f36 !important; }
+.o_form_view .o_inv_total_val .o_field_widget,
+.o_form_view .o_inv_total_val .o_field_widget span { font-weight: inherit !important; color: inherit !important; font-size: inherit !important; }
+.o_form_view .o_inv_total_divider { border-top: 2px solid #f0f0f0 !important; margin: 10px 0 !important; }
+.o_form_view .o_inv_grand_total { padding-top: 6px !important; }
+.o_form_view .o_inv_grand_total .o_inv_total_label { font-size: 15px !important; font-weight: 800 !important; color: #1a1f36 !important; }
+.o_form_view .o_inv_grand_val,
+.o_form_view .o_inv_grand_val .o_field_widget,
+.o_form_view .o_inv_grand_val .o_field_widget span { font-size: 20px !important; font-weight: 900 !important; color: #7c3aed !important; }
+
+/* ===== CONTROL PANEL ===== */
+
+.o_control_panel {
+    background: #ffffff !important; border-bottom: 1.5px solid #f0f0f0 !important;
+    box-shadow: 0 1px 4px rgba(0,0,0,0.06) !important;
+}
+.o_control_panel .o_breadcrumb .o_breadcrumb_item:last-child span,
+.o_control_panel .o_breadcrumb .active { font-size: 15px !important; font-weight: 700 !important; color: #1a1f36 !important; }
+.o_control_panel .o_breadcrumb .o_back_button { color: #7c3aed !important; font-weight: 600 !important; }
+.o_control_panel .o_searchview { background: #f8f7ff !important; border: 1.5px solid #e0d7ff !important; border-radius: 10px !important; box-shadow: none !important; }
+.o_control_panel .o_pager { background: #f8f7ff !important; border: 1.5px solid #e0d7ff !important; border-radius: 8px !important; padding: 4px 12px !important; margin-left: 8px !important; display: flex !important; align-items: center !important; gap: 6px !important; font-size: 13px !important; font-weight: 600 !important; color: #1a1f36 !important; }
+.o_control_panel .o_pager .o_pager_value { padding: 0 6px !important; font-weight: 700 !important; color: #1a1f36 !important; }
+.o_control_panel .o_pager .o_pager_limit { color: #9ca3af !important; font-weight: 500 !important; }
+
+/* ===== BUTTONS ===== */
+
+button.o_list_button_add,
+.o_cp_buttons button.o_list_button_add,
+button.o_form_button_create,
+.o_cp_buttons button.o_form_button_create {
+    background: linear-gradient(135deg, #7c3aed, #a855f7) !important;
+    border: none !important; border-radius: 8px !important; padding: 7px 20px !important;
+    font-size: 13px !important; font-weight: 700 !important; color: white !important;
+    box-shadow: 0 3px 10px rgba(124,58,237,0.35) !important; transition: all 0.2s ease !important;
+}
+button.o_list_button_add:hover, button.o_form_button_create:hover {
+    background: linear-gradient(135deg, #6d28d9, #9333ea) !important;
+    box-shadow: 0 5px 16px rgba(124,58,237,0.45) !important; transform: translateY(-1px) !important; color: white !important;
+}
+
+button.oe_highlight,
+.o_statusbar_buttons button.oe_highlight,
+.o_statusbar_buttons .btn-primary {
+    background: linear-gradient(135deg, #7c3aed, #a855f7) !important;
+    border: none !important; border-radius: 8px !important; padding: 7px 18px !important;
+    font-size: 13px !important; font-weight: 700 !important; color: white !important;
+    box-shadow: 0 3px 10px rgba(124,58,237,0.35) !important; transition: all 0.2s ease !important;
+}
+button.oe_highlight:hover, .o_statusbar_buttons button.oe_highlight:hover {
+    background: linear-gradient(135deg, #6d28d9, #9333ea) !important;
+    box-shadow: 0 5px 16px rgba(124,58,237,0.45) !important; transform: translateY(-1px) !important; color: white !important;
+}
+
+.o_statusbar_buttons .btn-secondary,
+.o_statusbar_buttons button:not(.oe_highlight):not(.btn-primary) {
+    background: white !important; color: #7c3aed !important;
+    border: 1.5px solid #c4b5fd !important; border-radius: 8px !important;
+    padding: 7px 18px !important; font-size: 13px !important; font-weight: 700 !important;
+    box-shadow: 0 1px 4px rgba(124,58,237,0.1) !important; transition: all 0.2s ease !important;
+}
+.o_statusbar_buttons .btn-secondary:hover,
+.o_statusbar_buttons button:not(.oe_highlight):not(.btn-primary):hover {
+    background: #f8f7ff !important; border-color: #7c3aed !important;
+    transform: translateY(-1px) !important; box-shadow: 0 3px 10px rgba(124,58,237,0.2) !important;
+}
+
+button.o_form_button_save,
+.o_cp_buttons button.o_form_button_save {
+    background: linear-gradient(135deg, #7c3aed, #a855f7) !important;
+    border: none !important; border-radius: 8px !important; padding: 7px 20px !important;
+    font-size: 13px !important; font-weight: 700 !important; color: white !important;
+    box-shadow: 0 3px 10px rgba(124,58,237,0.35) !important; transition: all 0.2s ease !important;
+}
+button.o_form_button_save:hover { background: linear-gradient(135deg, #6d28d9, #9333ea) !important; box-shadow: 0 5px 16px rgba(124,58,237,0.45) !important; transform: translateY(-1px) !important; color: white !important; }
+
+button.o_form_button_cancel,
+.o_cp_buttons button.o_form_button_cancel {
+    background: white !important; color: #7c3aed !important;
+    border: 1.5px solid #c4b5fd !important; border-radius: 8px !important;
+    padding: 7px 18px !important; font-size: 13px !important; font-weight: 700 !important;
+    box-shadow: 0 1px 4px rgba(124,58,237,0.1) !important; transition: all 0.2s ease !important;
+}
+button.o_form_button_cancel:hover { background: #f8f7ff !important; border-color: #7c3aed !important; transform: translateY(-1px) !important; box-shadow: 0 3px 10px rgba(124,58,237,0.2) !important; color: #7c3aed !important; }
+
+button.o_list_button_save,
+.o_cp_buttons button.o_list_button_save {
+    background: linear-gradient(135deg, #7c3aed, #a855f7) !important;
+    border: none !important; border-radius: 8px !important; padding: 7px 20px !important;
+    font-size: 13px !important; font-weight: 700 !important; color: white !important;
+    box-shadow: 0 3px 10px rgba(124,58,237,0.35) !important; transition: all 0.2s ease !important;
+}
+button.o_list_button_save:hover { background: linear-gradient(135deg, #6d28d9, #9333ea) !important; box-shadow: 0 5px 16px rgba(124,58,237,0.45) !important; transform: translateY(-1px) !important; color: white !important; }
+
+button.o_list_button_discard,
+.o_cp_buttons button.o_list_button_discard {
+    background: white !important; color: #7c3aed !important;
+    border: 1.5px solid #c4b5fd !important; border-radius: 8px !important;
+    padding: 7px 18px !important; font-size: 13px !important; font-weight: 700 !important;
+    box-shadow: 0 1px 4px rgba(124,58,237,0.1) !important; transition: all 0.2s ease !important;
+}
+button.o_list_button_discard:hover { background: #f8f7ff !important; border-color: #7c3aed !important; transform: translateY(-1px) !important; box-shadow: 0 3px 10px rgba(124,58,237,0.2) !important; color: #7c3aed !important; }
+
+/* ===== STATUS BAR STEPS ===== */
+
+.o_statusbar_status .o_arrow_button {
+    background: transparent !important; color: #7c3aed !important;
+    border: 1.5px solid #c4b5fd !important; font-weight: 600 !important;
+    font-size: 12px !important; opacity: 1 !important; box-shadow: none !important;
+}
+.o_statusbar_status .o_arrow_button.o_arrow_button_current {
+    background: linear-gradient(135deg, #7c3aed, #a855f7) !important;
+    color: white !important; border-color: #7c3aed !important; font-weight: 800 !important;
+    box-shadow: 0 3px 10px rgba(124,58,237,0.35) !important; opacity: 1 !important;
+}
+.o_statusbar_status .o_arrow_button.o_arrow_button_current[data-value="cancelled"] {
+    background: linear-gradient(135deg, #dc2626, #f87171) !important;
+    border-color: #dc2626 !important; box-shadow: 0 3px 10px rgba(220,38,38,0.3) !important;
+}
+
+/* ===== DASHBOARD ===== */
+
+.o_digital_dashboard .o_form_button_save,
+.o_digital_dashboard .o_form_button_discard { display: none !important; }
+.o_digital_dashboard .o_control_panel { display: none !important; }
+.o_digital_dashboard .o_form_sheet_bg { background: #f0f2f5 !important; }
+
+.o_dash_header { display: flex; justify-content: space-between; align-items: center; background: #1a1f36; border-radius: 12px; padding: 20px 28px; margin-bottom: 24px; }
+.o_dash_brand { font-size: 22px; font-weight: 800; color: #ffffff; letter-spacing: -0.5px; }
+.o_dash_sub { font-size: 12px; color: rgba(255,255,255,0.5); font-weight: 500; margin-top: 2px; letter-spacing: 1px; text-transform: uppercase; }
+.o_dash_filter_row { display: flex; gap: 16px; align-items: flex-end; }
+.o_dash_filter_item { display: flex; flex-direction: column; gap: 4px; }
+.o_dash_filter_label { font-size: 10px; color: rgba(255,255,255,0.5); text-transform: uppercase; letter-spacing: 0.8px; font-weight: 600; }
+.o_dash_filter_item .o_field_widget input,
+.o_dash_filter_item .o_field_widget .o_input { background: rgba(255,255,255,0.1) !important; border: 1px solid rgba(255,255,255,0.15) !important; color: white !important; border-radius: 6px !important; font-size: 12px !important; padding: 5px 10px !important; min-width: 120px; }
+
+.o_dash_kpi_row { display: grid; grid-template-columns: repeat(4, 1fr); gap: 16px; margin-bottom: 20px; }
+.o_dash_kpi { border-radius: 12px; overflow: hidden; box-shadow: 0 2px 12px rgba(0,0,0,0.08); transition: transform 0.2s, box-shadow 0.2s; }
+.o_dash_kpi:hover { transform: translateY(-3px); box-shadow: 0 8px 24px rgba(0,0,0,0.14); }
+.o_kpi_inner { all: unset; display: block; width: 100%; padding: 24px 20px 20px; cursor: pointer; box-sizing: border-box; }
+.o_kpi_icon { font-size: 22px; margin-bottom: 10px; opacity: 0.9; }
+.o_kpi_num { font-size: 44px; font-weight: 900; color: white; line-height: 1; margin-bottom: 6px; }
+.o_kpi_title { font-size: 11px; font-weight: 700; color: rgba(255,255,255,0.75); text-transform: uppercase; letter-spacing: 1.2px; margin-bottom: 14px; }
+.o_kpi_sub { font-size: 12px; font-weight: 600; color: rgba(255,255,255,0.9); background: rgba(0,0,0,0.12); border-radius: 6px; padding: 6px 10px; display: inline-block; }
+.o_kpi_blue   { background: linear-gradient(145deg, #2563eb, #1e40af); }
+.o_kpi_orange { background: linear-gradient(145deg, #ea580c, #c2410c); }
+.o_kpi_green  { background: linear-gradient(145deg, #16a34a, #15803d); }
+.o_kpi_purple { background: linear-gradient(145deg, #7c3aed, #6d28d9); }
+.o_kpi_num .o_field_widget,
+.o_kpi_sub .o_field_widget { color: inherit !important; font-size: inherit !important; font-weight: inherit !important; display: inline !important; }
+
+.o_dash_row2 { display: grid; grid-template-columns: 2fr 1fr; gap: 16px; margin-bottom: 20px; }
+.o_dash_card { background: white; border-radius: 12px; padding: 20px 24px; box-shadow: 0 1px 6px rgba(0,0,0,0.06); border: 1px solid #e8eaed; }
+.o_dash_card_header { display: flex; justify-content: space-between; align-items: center; margin-bottom: 18px; padding-bottom: 12px; border-bottom: 1px solid #f0f0f0; }
+.o_dash_card_title { font-size: 14px; font-weight: 700; color: #1a1f36; }
+.o_dash_card_badge { font-size: 10px; font-weight: 600; padding: 3px 10px; border-radius: 20px; background: #f0f2f5; color: #6b7280; text-transform: uppercase; }
+.o_badge_green { background: #dcfce7; color: #16a34a; }
+.o_dash_tax_row { display: flex; align-items: center; }
+.o_dash_tax_item { flex: 1; text-align: center; padding: 8px 12px; }
+.o_dash_tax_divider { width: 1px; height: 40px; background: #f0f0f0; }
+.o_dash_tax_label { font-size: 11px; color: #9ca3af; font-weight: 600; text-transform: uppercase; letter-spacing: 0.5px; margin-bottom: 4px; }
+.o_dash_tax_val { font-size: 15px; font-weight: 800; }
+.o_tax_blue { color: #2563eb; } .o_tax_green { color: #16a34a; } .o_tax_orange { color: #ea580c; } .o_tax_red { color: #dc2626; }
+.o_dash_fbr_body { text-align: center; padding: 8px 0; }
+.o_dash_fbr_rate { font-size: 48px; font-weight: 900; color: #1a1f36; line-height: 1; margin-bottom: 4px; }
+.o_dash_fbr_label { font-size: 11px; color: #9ca3af; text-transform: uppercase; letter-spacing: 1px; font-weight: 600; margin-bottom: 14px; }
+.o_dash_fbr_bar_bg { background: #f0f2f5; border-radius: 99px; height: 8px; margin: 0 auto 12px; overflow: hidden; }
+.o_dash_fbr_bar_fill { height: 100%; background: linear-gradient(90deg, #16a34a, #4ade80); border-radius: 99px; }
+.o_dash_fbr_stats { display: flex; justify-content: space-between; font-size: 11px; color: #6b7280; font-weight: 600; }
+.o_dash_fbr_rate .o_field_widget,
+.o_dash_fbr_stats .o_field_widget,
+.o_dash_tax_val .o_field_widget { color: inherit !important; font-size: inherit !important; font-weight: inherit !important; display: inline !important; }
+
+/* ===== SIMPLE AVATAR (category, subcategory, UOM, HS code) ===== */
+
+.o_form_view .o_simple_avatar {
+    width: 80px !important;
+    min-width: 80px !important;
+    height: 80px !important;
+    border-radius: 16px !important;
+    display: flex !important;
+    align-items: center !important;
+    justify-content: center !important;
+    flex-shrink: 0 !important;
+    font-size: 32px !important;
+    box-shadow: 0 4px 14px rgba(0,0,0,0.15) !important;
+}
+
+.o_form_view .o_avatar_purple {
+    background: linear-gradient(135deg, #7c3aed, #a855f7) !important;
+    box-shadow: 0 4px 14px rgba(124,58,237,0.35) !important;
+}
+
+.o_form_view .o_avatar_blue {
+    background: linear-gradient(135deg, #0ea5e9, #0284c7) !important;
+    box-shadow: 0 4px 14px rgba(14,165,233,0.35) !important;
+}
+
+/* HS Code description full width */
+.o_form_view .o_cust_card .o_field_widget.o_field_text,
+.o_form_view .o_cust_card .o_field_widget.o_field_text textarea {
+    width: 100% !important;
+    display: block !important;
+    box-sizing: border-box !important;
+}
+
+/* HS Code description — auto-grow textarea */
+.o_form_view .o_cust_card .o_field_widget.o_field_text textarea,
+.o_form_view .o_cust_card textarea {
+    min-height: 80px !important;
+    height: auto !important;
+    overflow-y: hidden !important;
+    resize: none !important;
+    line-height: 1.6 !important;
+    display: block !important;
+    width: 100% !important;
+    box-sizing: border-box !important;
+    field-sizing: content !important;
+}
+
+/* Invoice Line Items — Product (product_id) and Description (name, using
+   Odoo's own native section_and_note_text widget directly — no custom JS
+   of ours for this field) sit side-by-side, borderless. This is the
+   confirmed-stable configuration: Add a section / Add a note rely on the
+   pre-existing section_and_note_one2many widget on invoice_line_ids,
+   which this doesn't interfere with. Using `name` with our custom
+   invoice_line_description widget — handles hamburger-icon toggle for
+   regular rows AND full textarea for Section/Note rows. The outer
+   section_and_note_one2many widget handles Section/Note colspan
+   independently of what widget is used on the inner `name` field. */
+.o_digital_invoice_lines_table th[name="product_id"],
+.o_digital_invoice_lines_table td[name="product_id"] {
+    border-right: none !important;
+    box-shadow: none !important;
+}
+.o_digital_invoice_lines_table th[name="name"],
+.o_digital_invoice_lines_table td[name="name"] {
+    border-left: none !important;
+    box-shadow: none !important;
+}
+/* Header: blank label (string=""). The name column must stay in the DOM
+   so the native Section/Note colspan can still span across it, but for
+   regular rows it must take up NO horizontal space — otherwise it shows
+   as an awkward empty column between Item and HS Code. Collapse it to
+   zero width and hide its resize handle. The description UI (hamburger +
+   textarea) is rendered out of this collapsed cell via absolute
+   positioning, anchored under the Item column. */
+.o_digital_invoice_lines_table th[name="name"] {
+    width: 0 !important;
+    min-width: 0 !important;
+    max-width: 0 !important;
+    padding-left: 0 !important;
+    padding-right: 0 !important;
+    border: none !important;
+}
+.o_digital_invoice_lines_table th[name="name"] .o_resize {
+    display: none !important;
+}
+.o_digital_invoice_lines_table th[name="product_id"] {
+    width: 220px !important;
+    min-width: 180px !important;
+}
+/* Regular row name cell — zero width, no padding; it is only an anchor
+   for the absolutely-positioned hamburger/textarea below the Item cell.
+   Scoped to NON section/note rows: Section/Note rows give this cell a
+   colspan and must keep their full inline width, so they are excluded. */
+.o_digital_invoice_lines_table tbody tr:not(.o_is_line_section):not(.o_is_line_note):not(.o_is_line_subsection) td[name="name"] {
+    width: 0 !important;
+    min-width: 0 !important;
+    max-width: 0 !important;
+    padding-left: 0 !important;
+    padding-right: 0 !important;
+    overflow: visible !important;
+    position: relative !important;
+}
+/* tr must be the positioning context for the textarea */
+.o_digital_invoice_lines_table tbody tr {
+    position: relative !important;
+}
+.o_digital_invoice_lines_table td[name="name"] .o_invoice_line_description {
+    display: flex !important;
+    align-items: center !important;
+    min-height: 18px !important;
+}
+/* Collapsed icon — the name cell is zero-width, so pull the hamburger
+   back to the left to sit under the start of the Item column instead of
+   overflowing to the right of it. Vertically centre it in the row. */
+.o_digital_invoice_lines_table td[name="name"] .o_invoice_line_description:not(:has(textarea)) {
+    position: absolute !important;
+    left: -18px !important;
+    top: 50% !important;
+    transform: translateY(-50%) !important;
+    width: 18px !important;
+}
+.o_digital_invoice_lines_table td[name="name"] .o_invoice_line_description_toggle {
+    color: #875A7B !important;
+    font-size: 13px !important;
+    line-height: 1 !important;
+    border: none !important;
+    box-shadow: none !important;
+}
+/* Expanded textarea — positioned BELOW the row, anchored under the Item
+   column. The vertical `top` is set by JS from the measured row height,
+   and the row grows by the measured textarea height (--o-ld-pad), so it
+   can never overlap the next row (no hardcoded offsets). */
+.o_digital_invoice_lines_table td[name="name"] .o_invoice_line_description:has(textarea) {
+    position: absolute !important;
+    z-index: 10 !important;
+    background: white !important;
+    border-radius: 4px !important;
+    box-shadow: 0 2px 8px rgba(0, 0, 0, 0.12) !important;
+    /* left / top / width are set inline by the widget from measurement */
+}
+.o_digital_invoice_lines_table td[name="name"] .o_invoice_line_description_input {
+    width: 100% !important;
+    border: none !important;
+    outline: none !important;
+    background: transparent !important;
+    resize: none !important;
+    overflow: hidden !important;
+    padding: 2px 6px !important;
+    font-size: 0.85em !important;
+    color: #6b7280 !important;
+    min-height: 28px !important;
+}
+.o_digital_invoice_lines_table td[name="name"] .o_invoice_line_description_input:focus {
+    color: #111827 !important;
+}
+/* Row height expansion — only on rows with an open description textarea,
+   never on Section/Note rows. The amount is measured in JS from the real
+   textarea height and exposed as --o-ld-pad so the row grows by exactly
+   what the textarea needs and never overlaps the next row. */
+.o_digital_invoice_lines_table tbody tr.o_ld_expanded td {
+    padding-bottom: var(--o-ld-pad, 32px) !important;
+}

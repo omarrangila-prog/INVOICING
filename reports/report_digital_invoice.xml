@@ -1,0 +1,28 @@
+<?xml version="1.0" encoding="utf-8"?>
+<odoo>
+    <record id="action_report_digital_invoice" model="ir.actions.report">
+        <field name="name">Digital Invoice</field>
+        <field name="model">digital.invoice</field>
+        <field name="report_type">qweb-pdf</field>
+        <field name="report_name">invoicing.report_digital_invoice</field>
+        <field name="report_file">invoicing.report_digital_invoice</field>
+        <field name="print_report_name">'Digital Invoice %s' % (object.bill_no or 'New')</field>
+        <field name="paperformat_id" ref="base.paperformat_euro"/>
+    </record>
+
+    <record id="action_report_digital_invoice_book" model="ir.actions.report">
+        <field name="name">Invoice Book Report</field>
+        <field name="model">digital.invoice.book</field>
+        <field name="report_type">qweb-pdf</field>
+        <field name="report_name">invoicing.report_digital_invoice_book</field>
+        <field name="report_file">invoicing.report_digital_invoice_book</field>
+    </record>
+
+    <record id="action_report_sales_summary" model="ir.actions.report">
+        <field name="name">Sales Summary Report</field>
+        <field name="model">digital.invoice</field>
+        <field name="report_type">qweb-pdf</field>
+        <field name="report_name">invoicing.report_sales_summary</field>
+        <field name="report_file">invoicing.report_sales_summary</field>
+    </record>
+</odoo>

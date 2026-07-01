@@ -1,0 +1,346 @@
+<?xml version="1.0" encoding="utf-8"?>
+<odoo>
+
+    <!-- Item Master List View -->
+    <record id="view_item_master_tree" model="ir.ui.view">
+        <field name="name">item.master.tree</field>
+        <field name="model">item.master</field>
+        <field name="arch" type="xml">
+            <list string="Items" decoration-muted="not active">
+                <field name="code" string="Code" optional="show"/>
+                <field name="name" string="Item Name"/>
+                <field name="main_category_id" string="Category" optional="show"/>
+                <field name="sub_category_id" string="Sub Category" optional="hide"/>
+                <field name="uom_id" string="Regulatory UOM" optional="show"/>
+                <field name="hs_code_id" string="HS Code" optional="show"/>
+                <field name="sale_price" string="Sale Price" optional="show"/>
+                <field name="purchase_price" string="Purchase Price" optional="hide"/>
+                <field name="fbr_uom_rate" string="Rate per Regulatory UOM" optional="hide"/>
+                <field name="discount" string="Discount" optional="hide"/>
+                <field name="active" widget="boolean_toggle" optional="hide" string="Active"/>
+            </list>
+        </field>
+    </record>
+
+    <!-- Item Master Form View -->
+    <record id="view_item_master_form" model="ir.ui.view">
+        <field name="name">item.master.form</field>
+        <field name="model">item.master</field>
+        <field name="arch" type="xml">
+            <form string="Item Master">
+                <sheet>
+                    <div class="oe_button_box" name="button_box"/>
+                    <div class="o_cust_header">
+                        <div class="o_item_avatar">
+                            <field name="image" widget="image" options="{'size': [72, 72]}" nolabel="1" class="o_item_image"/>
+                        </div>
+                        <div class="o_cust_info_card">
+                            <h1 class="o_cust_name">
+                                <field name="name" placeholder="Item Name" required="1"/>
+                            </h1>
+                            <div class="o_cust_meta_row">
+                                <div class="o_cust_code_pill">
+                                    <field name="code" readonly="1" nolabel="1"/>
+                                </div>
+                                <span class="o_item_chip" invisible="not uom_id">
+                                    &#9881; <field name="uom_id" readonly="1" nolabel="1" class="o_cust_province_inline"/>
+                                </span>
+                                <span class="o_item_chip o_chip_blue" invisible="not hs_code_id">
+                                    HS: <field name="hs_code_id" readonly="1" nolabel="1" class="o_cust_province_inline"/>
+                                </span>
+                                <div class="o_cust_active_wrap">
+                                    <span class="o_cust_active_lbl">Active</span>
+                                    <field name="active" widget="boolean_toggle" nolabel="1"/>
+                                </div>
+                            </div>
+                        </div>
+                    </div>
+                    <div class="o_cust_divider"/>
+                    <div class="o_cust_grid_2">
+                        <div class="o_cust_card">
+                            <div class="o_cust_card_title">&#128193; Classification</div>
+                            <group>
+                                <field name="main_category_id" required="1"/>
+                                <field name="sub_category_id" required="1" domain="[('category_id', '=', main_category_id)]"/>
+                                <field name="isbn" string="ISBN / Barcode"/>
+                            </group>
+                        </div>
+                        <div class="o_cust_card">
+                            <div class="o_cust_card_title">&#128230; Units of Measure</div>
+                            <group>
+                                <label for="uom_id" string="Regulatory UOM"/>
+                                <div class="o_row">
+                                    <field name="uom_id" required="1" nolabel="1"/>
+                                    <button name="action_fetch_regulatory_uom" type="object"
+                                            string="Fetch from FBR" class="btn-secondary btn-sm"
+                                            icon="fa-cloud-download"
+                                            invisible="not hs_code_id"
+                                            confirm="This will call FBR and may overwrite the current Regulatory UOM. Continue?"/>
+                                </div>
+                                <field name="pack_uom_id" string="Commercial UOM"/>
+                                <field name="qty_per_pack" string="Qty per Pack"/>
+                                <field name="fbr_uom_rate" string="Rate per Regulatory UOM"/>
+                            </group>
+                        </div>
+                    </div>
+                    <div class="o_cust_divider"/>
+                    <div class="o_cust_grid_2">
+                        <div class="o_cust_card o_cust_card_green">
+                            <div class="o_cust_card_title o_title_green">&#128176; Pricing</div>
+                            <group>
+                                <field name="sale_price"/>
+                                <field name="purchase_price"/>
+                                <field name="discount"/>
+                                <field name="discount_type"/>
+                            </group>
+                        </div>
+                        <div class="o_cust_card o_cust_card_blue">
+                            <div class="o_cust_card_title o_title_blue">&#128196; HS Code &amp; Tax</div>
+                            <group>
+                                <field name="hs_code_id" required="1"
+                                       context="{'form_view_ref': 'invoicing.view_item_hs_code_quick_form'}"/>
+                                <field name="hs_description" readonly="1"/>
+                            </group>
+                        </div>
+                    </div>
+                </sheet>
+            </form>
+        </field>
+    </record>
+
+    <!-- Item Master Search View -->
+    <record id="view_item_master_search" model="ir.ui.view">
+        <field name="name">item.master.search</field>
+        <field name="model">item.master</field>
+        <field name="arch" type="xml">
+            <search string="Search Items">
+                <field name="name" string="Item Name"/>
+                <field name="code" string="Item Code"/>
+                <field name="main_category_id" string="Category"/>
+                <field name="hs_code_id" string="HS Code"/>
+                <filter name="active" string="Active" domain="[('active', '=', True)]"/>
+                <filter name="inactive" string="Archived" domain="[('active', '=', False)]"/>
+                <filter name="group_by_category" string="Category" context="{'group_by': 'main_category_id'}"/>
+                <filter name="group_by_hs_code" string="HS Code" context="{'group_by': 'hs_code_id'}"/>
+            </search>
+        </field>
+    </record>
+
+    <!-- Item Category List View -->
+    <record id="view_item_category_tree" model="ir.ui.view">
+        <field name="name">item.category.tree</field>
+        <field name="model">item.category</field>
+        <field name="arch" type="xml">
+            <list string="Item Categories" editable="bottom">
+                <field name="name"/>
+                <field name="item_count" readonly="1"/>
+                <field name="active"/>
+            </list>
+        </field>
+    </record>
+
+    <!-- Item Category Form View -->
+    <record id="view_item_category_form" model="ir.ui.view">
+        <field name="name">item.category.form</field>
+        <field name="model">item.category</field>
+        <field name="arch" type="xml">
+            <form string="Item Category">
+                <sheet>
+                    <div class="o_cust_header">
+                        <div class="o_simple_avatar o_avatar_blue">&#128193;</div>
+                        <div class="o_cust_info_card">
+                            <h1 class="o_cust_name">
+                                <field name="name" required="1" placeholder="Category Name"/>
+                            </h1>
+                            <div class="o_cust_meta_row">
+                                <span class="o_cust_province_chip">
+                                    &#128221; <field name="item_count" readonly="1" nolabel="1"
+                                                    class="o_cust_province_inline"/> items
+                                </span>
+                                <div class="o_cust_active_wrap">
+                                    <span class="o_cust_active_lbl">Active</span>
+                                    <field name="active" widget="boolean_toggle" nolabel="1"/>
+                                </div>
+                            </div>
+                        </div>
+                    </div>
+                    <div class="o_cust_divider"/>
+                    <div class="o_cust_card">
+                        <div class="o_cust_card_title">&#128193; Sub-Categories</div>
+                        <field name="subcategory_ids">
+                            <list editable="bottom">
+                                <field name="name"/>
+                                <field name="active"/>
+                            </list>
+                        </field>
+                    </div>
+                </sheet>
+            </form>
+        </field>
+    </record>
+
+    <!-- Item Subcategory List View -->
+    <record id="view_item_subcategory_tree" model="ir.ui.view">
+        <field name="name">item.subcategory.tree</field>
+        <field name="model">item.subcategory</field>
+        <field name="arch" type="xml">
+            <list string="Item Sub-Categories">
+                <field name="name"/>
+                <field name="category_id"/>
+                <field name="active"/>
+            </list>
+        </field>
+    </record>
+
+    <!-- Item Subcategory Form View -->
+    <record id="view_item_subcategory_form" model="ir.ui.view">
+        <field name="name">item.subcategory.form</field>
+        <field name="model">item.subcategory</field>
+        <field name="arch" type="xml">
+            <form string="Item Sub-Category">
+                <sheet>
+                    <div class="o_cust_header">
+                        <div class="o_simple_avatar o_avatar_blue">&#128193;</div>
+                        <div class="o_cust_info_card">
+                            <h1 class="o_cust_name">
+                                <field name="name" required="1" placeholder="Sub-Category Name"/>
+                            </h1>
+                            <div class="o_cust_meta_row">
+                                <span class="o_cust_province_chip" invisible="not category_id">
+                                    &#128193; <field name="category_id" readonly="1" nolabel="1"
+                                                    class="o_cust_province_inline"
+                                                    options="{'no_open': True}"/>
+                                </span>
+                                <div class="o_cust_active_wrap">
+                                    <span class="o_cust_active_lbl">Active</span>
+                                    <field name="active" widget="boolean_toggle" nolabel="1"/>
+                                </div>
+                            </div>
+                        </div>
+                    </div>
+                    <div class="o_cust_divider"/>
+                    <div class="o_cust_card">
+                        <div class="o_cust_card_title">&#128193; Details</div>
+                        <group>
+                            <field name="category_id" required="1" options="{'no_open': True}"/>
+                        </group>
+                    </div>
+                </sheet>
+            </form>
+        </field>
+    </record>
+
+    <!-- Item UOM List View -->
+    <record id="view_item_uom_tree" model="ir.ui.view">
+        <field name="name">item.uom.tree</field>
+        <field name="model">item.uom</field>
+        <field name="arch" type="xml">
+            <list string="Units of Measure" editable="bottom">
+                <field name="name"/>
+                <field name="active"/>
+            </list>
+        </field>
+    </record>
+
+    <!-- Item UOM Form View -->
+    <record id="view_item_uom_form" model="ir.ui.view">
+        <field name="name">item.uom.form</field>
+        <field name="model">item.uom</field>
+        <field name="arch" type="xml">
+            <form string="Unit of Measure">
+                <sheet>
+                    <div class="o_cust_header">
+                        <div class="o_simple_avatar o_avatar_blue">&#9881;</div>
+                        <div class="o_cust_info_card">
+                            <h1 class="o_cust_name">
+                                <field name="name" required="1" placeholder="Unit Name"/>
+                            </h1>
+                            <div class="o_cust_meta_row">
+                                <div class="o_cust_active_wrap">
+                                    <span class="o_cust_active_lbl">Active</span>
+                                    <field name="active" widget="boolean_toggle" nolabel="1"/>
+                                </div>
+                            </div>
+                        </div>
+                    </div>
+                </sheet>
+            </form>
+        </field>
+    </record>
+
+    <!-- HS Code List View -->
+    <record id="view_item_hs_code_tree" model="ir.ui.view">
+        <field name="name">item.hs.code.tree</field>
+        <field name="model">item.hs.code</field>
+        <field name="arch" type="xml">
+            <list string="HS Codes">
+                <field name="code"/>
+                <field name="description"/>
+                <field name="default_uom"/>
+            </list>
+        </field>
+    </record>
+
+    <!-- HS Code Form View -->
+    <record id="view_item_hs_code_form" model="ir.ui.view">
+        <field name="name">item.hs.code.form</field>
+        <field name="model">item.hs.code</field>
+        <field name="arch" type="xml">
+            <form string="HS Code">
+                <sheet>
+                    <div class="o_cust_header">
+                        <div class="o_simple_avatar o_avatar_blue">&#128196;</div>
+                        <div class="o_cust_info_card">
+                            <h1 class="o_cust_name">
+                                <field name="code" required="1" placeholder="HS Code"/>
+                            </h1>
+                            <div class="o_cust_meta_row">
+                                <span class="o_cust_province_chip" invisible="not default_uom">
+                                    &#9881; <field name="default_uom" readonly="1" nolabel="1"
+                                                  class="o_cust_province_inline"/>
+                                </span>
+                                <div class="o_cust_active_wrap">
+                                    <span class="o_cust_active_lbl">Active</span>
+                                    <field name="active" widget="boolean_toggle" nolabel="1"/>
+                                </div>
+                            </div>
+                        </div>
+                    </div>
+                    <div class="o_cust_divider"/>
+                    <div class="o_cust_card o_cust_card_blue" style="margin-bottom:12px;">
+                        <div class="o_cust_card_title o_title_blue">&#128196; HS Details</div>
+                        <group>
+                            <field name="default_uom"/>
+                        </group>
+                    </div>
+                    <div class="o_cust_card">
+                        <div class="o_cust_card_title">&#128221; Description</div>
+                        <field name="description" nolabel="1"
+                               placeholder="Enter full description..."
+                               style="width:100%; min-height:80px;"/>
+                    </div>
+                </sheet>
+            </form>
+        </field>
+    </record>
+
+    <!-- HS Code Quick Form -->
+    <record id="view_item_hs_code_quick_form" model="ir.ui.view">
+        <field name="name">item.hs.code.quick.form</field>
+        <field name="model">item.hs.code</field>
+        <field name="priority">20</field>
+        <field name="arch" type="xml">
+            <form string="HS Code">
+                <sheet>
+                    <group>
+                        <field name="code" required="1"/>
+                        <field name="description"/>
+                        <field name="default_uom"/>
+                        <field name="active"/>
+                    </group>
+                </sheet>
+            </form>
+        </field>
+    </record>
+
+</odoo>

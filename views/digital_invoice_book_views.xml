@@ -1,0 +1,17 @@
+<?xml version="1.0" encoding="utf-8"?>
+<odoo>
+
+    <record id="view_digital_invoice_book_tree" model="ir.ui.view">
+        <field name="name">digital.invoice.book.tree</field>
+        <field name="model">digital.invoice.book</field>
+        <field name="arch" type="xml">
+            <list string="Digital Invoice Book" create="false" edit="false" delete="false">
+                <field name="invoice_number"/>
+                <field name="invoice_date"/>
+                <field name="customer_id"/>
+                <field name="status"/>
+            </list>
+        </field>
+    </record>
+
+</odoo>

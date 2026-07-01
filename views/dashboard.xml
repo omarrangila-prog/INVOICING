@@ -1,0 +1,136 @@
+<?xml version="1.0" encoding="utf-8"?>
+<odoo>
+    <data noupdate="0">
+        <record id="view_digital_invoice_dashboard_form" model="ir.ui.view">
+            <field name="name">digital.invoice.dashboard.form</field>
+            <field name="model">digital.invoice.dashboard</field>
+            <field name="arch" type="xml">
+                <form string="Digital Invoice Dashboard" create="false" delete="false" class="o_digital_dashboard">
+                    <sheet>
+
+                        <!-- Header -->
+                        <div class="o_dash_header">
+                            <div class="o_dash_header_left">
+                                <div class="o_dash_brand">Digital Invoicing</div>
+                                <div class="o_dash_sub">FBR Compliance Dashboard</div>
+                            </div>
+                            <div class="o_dash_header_right">
+                                <div class="o_dash_filter_row">
+                                    <div class="o_dash_filter_item">
+                                        <div class="o_dash_filter_label">From</div>
+                                        <field name="date_from" nolabel="1"/>
+                                    </div>
+                                    <div class="o_dash_filter_item">
+                                        <div class="o_dash_filter_label">To</div>
+                                        <field name="date_to" nolabel="1"/>
+                                    </div>
+                                    <div class="o_dash_filter_item">
+                                        <div class="o_dash_filter_label">Customer</div>
+                                        <field name="customer_id" nolabel="1"/>
+                                    </div>
+                                </div>
+                            </div>
+                        </div>
+
+                        <!-- KPI Row -->
+                        <div class="o_dash_kpi_row">
+
+                            <div class="o_dash_kpi o_kpi_blue">
+                                <button name="action_view_all" type="object" class="o_kpi_inner">
+                                    <div class="o_kpi_icon">&#128196;</div>
+                                    <div class="o_kpi_num"><field name="total_invoices" readonly="1"/></div>
+                                    <div class="o_kpi_title">Total Invoices</div>
+                                    <div class="o_kpi_sub">PKR <field name="total_amount" readonly="1"/></div>
+                                </button>
+                            </div>
+
+                            <div class="o_dash_kpi o_kpi_orange">
+                                <button name="action_view_pending" type="object" class="o_kpi_inner">
+                                    <div class="o_kpi_icon">&#9202;</div>
+                                    <div class="o_kpi_num"><field name="pending_invoices" readonly="1"/></div>
+                                    <div class="o_kpi_title">Pending / Draft</div>
+                                    <div class="o_kpi_sub">PKR <field name="pending_amount" readonly="1"/></div>
+                                </button>
+                            </div>
+
+                            <div class="o_dash_kpi o_kpi_green">
+                                <button name="action_view_submitted" type="object" class="o_kpi_inner">
+                                    <div class="o_kpi_icon">&#10003;</div>
+                                    <div class="o_kpi_num"><field name="submitted_invoices" readonly="1"/></div>
+                                    <div class="o_kpi_title">Posted to FBR</div>
+                                    <div class="o_kpi_sub">PKR <field name="submitted_amount" readonly="1"/></div>
+                                </button>
+                            </div>
+
+                            <div class="o_dash_kpi o_kpi_purple">
+                                <button name="action_view_invoice_book" type="object" class="o_kpi_inner">
+                                    <div class="o_kpi_icon">&#128101;</div>
+                                    <div class="o_kpi_num"><field name="total_customers" readonly="1"/></div>
+                                    <div class="o_kpi_title">Total Customers</div>
+                                    <div class="o_kpi_sub">Active accounts</div>
+                                </button>
+                            </div>
+
+                        </div>
+
+                        <!-- Second Row: Tax + FBR Rate -->
+                        <div class="o_dash_row2">
+
+                            <!-- Tax Summary -->
+                            <div class="o_dash_card o_dash_tax">
+                                <div class="o_dash_card_header">
+                                    <span class="o_dash_card_title">Tax Summary</span>
+                                    <span class="o_dash_card_badge">This Period</span>
+                                </div>
+                                <div class="o_dash_tax_row">
+                                    <div class="o_dash_tax_item">
+                                        <div class="o_dash_tax_label">Total Revenue</div>
+                                        <div class="o_dash_tax_val o_tax_blue">PKR <field name="total_amount" readonly="1"/></div>
+                                    </div>
+                                    <div class="o_dash_tax_divider"/>
+                                    <div class="o_dash_tax_item">
+                                        <div class="o_dash_tax_label">GST Collected</div>
+                                        <div class="o_dash_tax_val o_tax_green">PKR <field name="total_gst" readonly="1"/></div>
+                                    </div>
+                                    <div class="o_dash_tax_divider"/>
+                                    <div class="o_dash_tax_item">
+                                        <div class="o_dash_tax_label">FST Collected</div>
+                                        <div class="o_dash_tax_val o_tax_orange">PKR <field name="total_fst" readonly="1"/></div>
+                                    </div>
+                                    <div class="o_dash_tax_divider"/>
+                                    <div class="o_dash_tax_item">
+                                        <div class="o_dash_tax_label">Total Tax</div>
+                                        <div class="o_dash_tax_val o_tax_red">PKR <field name="total_tax" readonly="1"/></div>
+                                    </div>
+                                </div>
+                            </div>
+
+                            <!-- FBR Compliance Rate -->
+                            <div class="o_dash_card o_dash_fbr">
+                                <div class="o_dash_card_header">
+                                    <span class="o_dash_card_title">FBR Compliance</span>
+                                    <span class="o_dash_card_badge o_badge_green">Live</span>
+                                </div>
+                                <div class="o_dash_fbr_body">
+                                    <div class="o_dash_fbr_rate">
+                                        <field name="fbr_compliance_rate" readonly="1"/>%
+                                    </div>
+                                    <div class="o_dash_fbr_label">Submission Rate</div>
+                                    <div class="o_dash_fbr_bar_bg">
+                                        <div class="o_dash_fbr_bar_fill"/>
+                                    </div>
+                                    <div class="o_dash_fbr_stats">
+                                        <span><field name="submitted_invoices" readonly="1"/> Posted</span>
+                                        <span><field name="pending_invoices" readonly="1"/> Pending</span>
+                                    </div>
+                                </div>
+                            </div>
+
+                        </div>
+
+                    </sheet>
+                </form>
+            </field>
+        </record>
+    </data>
+</odoo>

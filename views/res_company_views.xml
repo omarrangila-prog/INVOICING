@@ -1,0 +1,39 @@
+<?xml version="1.0" encoding="utf-8"?>
+<odoo>
+    <record id="view_company_form_fbr" model="ir.ui.view">
+        <field name="name">res.company.form.fbr</field>
+        <field name="model">res.company</field>
+        <field name="inherit_id" ref="base.view_company_form"/>
+        <field name="arch" type="xml">
+             <xpath expr="//notebook" position="inside">
+                <page string="FBR Digital Invoicing Configuration">
+                    <group string="FBR Credentials">
+                        <!-- Admin sees toggle (show/hide eye icon) -->
+                        <field name="fbr_token"
+                               widget="password_toggle"
+                               string="Production Token"
+                               groups="base.group_system"/>
+                        <!-- Non-admin sees masked field only, no toggle -->
+                        <field name="fbr_token"
+                               widget="password"
+                               string="Production Token"
+                               readonly="1"
+                               groups="!base.group_system"/>
+                        <field name="is_fbr_sandbox"/>
+                        <field name="fbr_sandbox_token" string="Sandbox Token" invisible="not is_fbr_sandbox"/>
+                    </group>
+                    <group string="Seller Business Information">
+                        <group>
+                            <field name="fbr_ntn" string="NTN/CNIC"/>
+                            <field name="fbr_business_name" string="Business Name"/>
+                        </group>
+                        <group>
+                            <field name="fbr_business_province" string="Province"/>
+                            <field name="fbr_business_address" string="Address"/>
+                        </group>
+                    </group>
+                </page>
+            </xpath>
+        </field>
+    </record>
+</odoo>

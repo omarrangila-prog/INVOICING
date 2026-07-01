@@ -1,0 +1,245 @@
+/* ===== HIDE ODOO CHROME ===== */
+.o_digital_dashboard .o_form_button_save,
+.o_digital_dashboard .o_form_button_discard { display: none !important; }
+.o_digital_dashboard .o_control_panel { display: none !important; }
+.o_digital_dashboard .o_form_sheet_bg { background: #f0f2f5 !important; }
+
+/* ===== HEADER ===== */
+.o_dash_header {
+    display: flex;
+    justify-content: space-between;
+    align-items: center;
+    background: #1a1f36;
+    border-radius: 12px;
+    padding: 20px 28px;
+    margin-bottom: 24px;
+}
+.o_dash_brand {
+    font-size: 22px;
+    font-weight: 800;
+    color: #ffffff;
+    letter-spacing: -0.5px;
+}
+.o_dash_sub {
+    font-size: 12px;
+    color: rgba(255,255,255,0.5);
+    font-weight: 500;
+    margin-top: 2px;
+    letter-spacing: 1px;
+    text-transform: uppercase;
+}
+.o_dash_filter_row {
+    display: flex;
+    gap: 16px;
+    align-items: flex-end;
+}
+.o_dash_filter_item {
+    display: flex;
+    flex-direction: column;
+    gap: 4px;
+}
+.o_dash_filter_label {
+    font-size: 10px;
+    color: rgba(255,255,255,0.5);
+    text-transform: uppercase;
+    letter-spacing: 0.8px;
+    font-weight: 600;
+}
+.o_dash_filter_item .o_field_widget input,
+.o_dash_filter_item .o_field_widget .o_input {
+    background: rgba(255,255,255,0.1) !important;
+    border: 1px solid rgba(255,255,255,0.15) !important;
+    color: white !important;
+    border-radius: 6px !important;
+    font-size: 12px !important;
+    padding: 5px 10px !important;
+    min-width: 120px;
+}
+
+/* ===== KPI ROW ===== */
+.o_dash_kpi_row {
+    display: grid;
+    grid-template-columns: repeat(4, 1fr);
+    gap: 16px;
+    margin-bottom: 20px;
+}
+.o_dash_kpi {
+    border-radius: 12px;
+    overflow: hidden;
+    box-shadow: 0 2px 12px rgba(0,0,0,0.08);
+    transition: transform 0.2s, box-shadow 0.2s;
+}
+.o_dash_kpi:hover {
+    transform: translateY(-3px);
+    box-shadow: 0 8px 24px rgba(0,0,0,0.14);
+}
+.o_kpi_inner {
+    all: unset;
+    display: block;
+    width: 100%;
+    padding: 24px 20px 20px;
+    cursor: pointer;
+    box-sizing: border-box;
+    position: relative;
+}
+.o_kpi_icon {
+    font-size: 22px;
+    margin-bottom: 10px;
+    opacity: 0.9;
+}
+.o_kpi_num {
+    font-size: 44px;
+    font-weight: 900;
+    color: white;
+    line-height: 1;
+    margin-bottom: 6px;
+}
+.o_kpi_title {
+    font-size: 11px;
+    font-weight: 700;
+    color: rgba(255,255,255,0.75);
+    text-transform: uppercase;
+    letter-spacing: 1.2px;
+    margin-bottom: 14px;
+}
+.o_kpi_sub {
+    font-size: 12px;
+    font-weight: 600;
+    color: rgba(255,255,255,0.9);
+    background: rgba(0,0,0,0.12);
+    border-radius: 6px;
+    padding: 6px 10px;
+    display: inline-block;
+}
+
+/* KPI Colors — corporate palette */
+.o_kpi_blue   { background: linear-gradient(145deg, #2563eb, #1e40af); }
+.o_kpi_orange { background: linear-gradient(145deg, #ea580c, #c2410c); }
+.o_kpi_green  { background: linear-gradient(145deg, #16a34a, #15803d); }
+.o_kpi_purple { background: linear-gradient(145deg, #7c3aed, #6d28d9); }
+
+/* ===== ROW 2 ===== */
+.o_dash_row2 {
+    display: grid;
+    grid-template-columns: 2fr 1fr;
+    gap: 16px;
+    margin-bottom: 20px;
+}
+.o_dash_card {
+    background: white;
+    border-radius: 12px;
+    padding: 20px 24px;
+    box-shadow: 0 1px 6px rgba(0,0,0,0.06);
+    border: 1px solid #e8eaed;
+}
+.o_dash_card_header {
+    display: flex;
+    justify-content: space-between;
+    align-items: center;
+    margin-bottom: 18px;
+    padding-bottom: 12px;
+    border-bottom: 1px solid #f0f0f0;
+}
+.o_dash_card_title {
+    font-size: 14px;
+    font-weight: 700;
+    color: #1a1f36;
+    letter-spacing: -0.2px;
+}
+.o_dash_card_badge {
+    font-size: 10px;
+    font-weight: 600;
+    padding: 3px 10px;
+    border-radius: 20px;
+    background: #f0f2f5;
+    color: #6b7280;
+    text-transform: uppercase;
+    letter-spacing: 0.5px;
+}
+.o_badge_green {
+    background: #dcfce7;
+    color: #16a34a;
+}
+
+/* Tax Summary */
+.o_dash_tax_row {
+    display: flex;
+    align-items: center;
+    gap: 0;
+}
+.o_dash_tax_item {
+    flex: 1;
+    text-align: center;
+    padding: 8px 12px;
+}
+.o_dash_tax_divider {
+    width: 1px;
+    height: 40px;
+    background: #f0f0f0;
+}
+.o_dash_tax_label {
+    font-size: 11px;
+    color: #9ca3af;
+    font-weight: 600;
+    text-transform: uppercase;
+    letter-spacing: 0.5px;
+    margin-bottom: 4px;
+}
+.o_dash_tax_val {
+    font-size: 15px;
+    font-weight: 800;
+}
+.o_tax_blue   { color: #2563eb; }
+.o_tax_green  { color: #16a34a; }
+.o_tax_orange { color: #ea580c; }
+.o_tax_red    { color: #dc2626; }
+
+/* FBR Compliance */
+.o_dash_fbr_body { text-align: center; padding: 8px 0; }
+.o_dash_fbr_rate {
+    font-size: 48px;
+    font-weight: 900;
+    color: #1a1f36;
+    line-height: 1;
+    margin-bottom: 4px;
+}
+.o_dash_fbr_label {
+    font-size: 11px;
+    color: #9ca3af;
+    text-transform: uppercase;
+    letter-spacing: 1px;
+    font-weight: 600;
+    margin-bottom: 14px;
+}
+.o_dash_fbr_bar_bg {
+    background: #f0f2f5;
+    border-radius: 99px;
+    height: 8px;
+    margin: 0 auto 12px;
+    overflow: hidden;
+}
+.o_dash_fbr_bar_fill {
+    height: 100%;
+    background: linear-gradient(90deg, #16a34a, #4ade80);
+    border-radius: 99px;
+    transition: width 0.5s ease;
+}
+.o_dash_fbr_stats {
+    display: flex;
+    justify-content: space-between;
+    font-size: 11px;
+    color: #6b7280;
+    font-weight: 600;
+}
+
+/* ===== FIELD OVERRIDES ===== */
+.o_kpi_num .o_field_widget,
+.o_kpi_sub .o_field_widget,
+.o_dash_tax_val .o_field_widget,
+.o_dash_fbr_rate .o_field_widget,
+.o_dash_fbr_stats .o_field_widget {
+    color: inherit !important;
+    font-size: inherit !important;
+    font-weight: inherit !important;
+    display: inline !important;
+}

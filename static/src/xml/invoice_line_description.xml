@@ -1,0 +1,31 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<templates xml:space="preserve">
+
+    <t t-name="invoicing.InvoiceLineDescriptionField">
+        <div class="o_invoice_line_description" t-ref="root">
+            <t t-if="isDisplayType">
+                <textarea
+                    t-attf-class="o_invoice_line_description_input {{ isSection ? 'fw-bold' : 'fst-italic text-muted' }}"
+                    t-att-value="value"
+                    t-on-blur="onBlur"
+                    placeholder="Enter a description"/>
+            </t>
+            <t t-elif="state.open">
+                <textarea
+                    class="o_invoice_line_description_input"
+                    t-att-value="value"
+                    t-on-blur="onBlur"
+                    placeholder="Enter a description"/>
+            </t>
+            <t t-else="">
+                <button type="button"
+                        class="btn btn-link p-0 o_invoice_line_description_toggle"
+                        t-on-click="toggleOpen"
+                        title="Add a description">
+                    <i class="fa fa-bars"/>
+                </button>
+            </t>
+        </div>
+    </t>
+
+</templates>
